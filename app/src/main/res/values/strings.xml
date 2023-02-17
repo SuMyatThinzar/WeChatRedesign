@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">WeChatRedesign</string>
+    <string name="lbl_sign_up">Sign Up</string>
+    <string name="lbl_login">Login</string>
+    <string name="lbl_enter_your_phone_number">Enter Your Phone Number</string>
+    <string name="lbl_get_otp">Get OTP</string>
+    <string name="lbl_create_a_new_account">Create a new account</string>
+    <string name="lbl_date_of_birth">Date of Birth</string>
+    <string name="lbl_gender">Gender</string>
+    <string name="lbl_female">Female</string>
+    <string name="lbl_male">Male</string>
+    <string name="lbl_other">Other</string>
+
+    <string name="lbl_agree_to_term_and_service">Agree To <b>Term and Service</b></string>
+
+    <string name="lbl_name">Name</string>
+    <string name="lbl_moments">Moments</string>
+    <string name="lbl_create">Create</string>
+    <string name="lbl_what_s_on_your_mind">What\'s on your mind</string>
+    <string name="lbl_moment">Moment</string>
+    <string name="lbl_chat">Chat</string>
+    <string name="lbl_contacts">Contacts</string>
+    <string name="lbl_me">Me</string>
+    <string name="lbl_setting">Setting</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="lbl_chats">Chats</string>
+    <string name="lb_active_now">Active Now</string>
+    <string name="lbl_add_new">Add New</string>
+    <string name="lbl_search">Search</string>
+    <string name="lbl_phone_number">Phone Number</string>
+    <string name="lbl_save">Save</string>
+    <string name="lbl_cancel">Cancel</string>
+    <string name="lbl_groups">Groups</string>
+    <string name="lbl_logout">Logout</string>
+</resources>

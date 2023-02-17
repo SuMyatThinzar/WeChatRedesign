@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activities.NewMomentActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/white">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/btnClose"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/margin_medium_2"
+                android:src="@drawable/ic_baseline_close_accent_24dp" />
+
+            <Button
+                android:id="@+id/btnCreate"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/text_big"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/margin_medium_2"
+                android:background="@drawable/background_button_accent"
+                android:elevation="2dp"
+                android:fontFamily="serif"
+                android:text="@string/lbl_create"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolBar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="75dp"
+                app:title="New Moment"
+                app:titleTextColor="@color/colorAccent" />
+
+        </RelativeLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.padcmyanmar.smtz.wechatredesign.views.components.RoundCornerImageView
+            android:id="@+id/ivProfileNewMoments"
+            android:layout_width="@dimen/margin_xxlarge"
+            android:layout_height="@dimen/margin_xxlarge"
+            android:layout_marginStart="@dimen/margin_medium_2"
+            android:layout_marginTop="@dimen/margin_medium_3"
+            android:scaleType="centerCrop"
+            android:src="@drawable/profile"
+            app:cornerRadius="@dimen/margin_large" />
+
+        <TextView
+            android:id="@+id/tvUserNameNewMoments"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_medium_2"
+            android:layout_marginTop="@dimen/margin_large"
+            android:layout_toEndOf="@id/ivProfileNewMoments"
+            android:text="Michael"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/text_regular_2x"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/etCreateMoment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/horizontal_scroll_view"
+            android:layout_below="@id/ivProfileNewMoments"
+            android:layout_marginStart="@dimen/margin_medium_2"
+            android:layout_marginTop="@dimen/margin_medium_2"
+            android:layout_marginEnd="@dimen/margin_medium_2"
+            android:layout_marginBottom="@dimen/margin_medium_2"
+            android:background="@android:color/transparent"
+            android:gravity="top|start"
+            android:hint="@string/lbl_what_s_on_your_mind"
+            android:inputType="textMultiLine"
+            android:lines="10" />
+
+        <HorizontalScrollView
+            android:id="@+id/horizontal_scroll_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:scrollbars="none">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvSelectedPhotos"
+                    android:layout_width="wrap_content"
+                    android:layout_height="130dp"
+                    android:clipToPadding="false"
+                    android:paddingStart="@dimen/margin_medium_2"
+                    android:paddingEnd="@dimen/margin_medium" />
+
+                <ImageView
+                    android:id="@+id/btnSelectPhoto"
+                    android:layout_width="100dp"
+                    android:layout_height="130dp"
+                    android:layout_marginStart="@dimen/margin_small_n"
+                    android:layout_marginEnd="@dimen/margin_medium_2"
+                    android:layout_toEndOf="@id/rvSelectedPhotos"
+                    android:src="@drawable/ic_tab" />
+
+            </RelativeLayout>
+
+        </HorizontalScrollView>
+
+    </RelativeLayout>
+
+</LinearLayout>

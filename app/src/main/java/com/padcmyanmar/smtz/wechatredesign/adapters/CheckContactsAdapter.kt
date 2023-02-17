@@ -1,0 +1,35 @@
+package com.padcmyanmar.smtz.wechatredesign.adapters
+
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
+import com.padcmyanmar.smtz.wechatredesign.R
+import com.padcmyanmar.smtz.wechatredesign.data.vos.UserVO
+import com.padcmyanmar.smtz.wechatredesign.delegates.SelectMemberDelegate
+import com.padcmyanmar.smtz.wechatredesign.views.viewholders.CheckContactsViewHolder
+
+class CheckContactsAdapter(private val mDelegate: SelectMemberDelegate) : RecyclerView.Adapter<CheckContactsViewHolder>() {
+
+    private var mData: List<UserVO> = listOf()
+//    private var mMembers: MutableList<UserVO> = mutableListOf()
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CheckContactsViewHolder {
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.view_holder_check_contacts_new_group,parent,false)
+        return CheckContactsViewHolder(itemView, mDelegate)
+    }
+
+    override fun onBindViewHolder(holder: CheckContactsViewHolder, position: Int) {
+        if(mData.isNotEmpty()){
+            holder.bindData(mData[position])
+        }
+    }
+
+    override fun getItemCount(): Int {
+        return mData.size
+    }
+
+    fun setNewData(data: List<UserVO>){
+        mData = data
+        notifyDataSetChanged()
+    }
+}

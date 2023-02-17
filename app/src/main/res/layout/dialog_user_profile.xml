@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/margin_medium_2"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/margin_medium_2">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etNameDialog"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/lbl_name" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout2"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etPhoneNumberDialog"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/lbl_phone_number" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <TextView
+        android:id="@+id/tvDateOfBirth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_medium_2"
+        android:text="@string/lbl_date_of_birth"
+        android:textColor="@color/colorSecondaryText"
+        android:textSize="@dimen/text_regular_2x" />
+
+    <LinearLayout
+        android:id="@+id/llSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_medium_2"
+        android:orientation="horizontal"
+        android:weightSum="10">
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2.7">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin_xxlarge"
+                android:background="@drawable/background_spinner" />
+
+            <Spinner
+                android:id="@+id/spinnerDayDialog"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_medium"
+                style="@style/Widget.AppCompat.DropDownItem.Spinner"/>
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="4">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin_xxlarge"
+                android:background="@drawable/background_spinner" />
+
+            <Spinner
+                android:id="@+id/spinnerMonthDialog"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:entries="@array/months" />
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="@dimen/margin_xxlarge"
+            android:layout_weight="3.3">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin_xxlarge"
+                android:background="@drawable/background_spinner" />
+
+            <Spinner
+                android:id="@+id/spinnerYearDialog"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:spinnerMode="dropdown"
+                android:layout_marginTop="@dimen/margin_medium" />
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvGender"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_medium_2"
+        android:text="@string/lbl_gender"
+        android:textColor="@color/colorSecondaryText"
+        android:textSize="@dimen/text_regular_2x" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/margin_xxlarge"
+        android:orientation="horizontal"
+        android:weightSum="3">
+
+        <RadioButton
+            android:id="@+id/rbMaleDialog"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_medium_2"
+            android:layout_weight="1"
+            android:buttonTint="@color/colorAccent"
+            android:text="@string/lbl_male"
+            android:textSize="@dimen/text_small"
+            android:textColor="@color/colorAccent" />
+
+        <RadioButton
+            android:id="@+id/rbFemaleDialog"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_medium_2"
+            android:layout_weight="1"
+            android:buttonTint="@color/colorAccent"
+            android:text="@string/lbl_female"
+            android:textSize="@dimen/text_small"
+            android:textColor="@color/colorAccent" />
+
+        <RadioButton
+            android:id="@+id/rbOtherDialog"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_medium_2"
+            android:layout_weight="1"
+            android:buttonTint="@color/colorAccent"
+            android:text="@string/lbl_other"
+            android:textSize="@dimen/text_small"
+            android:textColor="@color/colorAccent" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_xlarge"
+        android:layout_marginTop="@dimen/margin_xlarge"
+        android:layout_marginEnd="@dimen/margin_xlarge"
+        android:layout_marginBottom="@dimen/margin_medium_2"
+        android:weightSum="2">
+
+        <Button
+            android:id="@+id/btnCancel"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:layout_marginEnd="@dimen/margin_large"
+            android:background="@drawable/background_button_sign_up"
+            android:fontFamily="serif"
+            android:gravity="center"
+            android:text="@string/lbl_cancel"
+            android:textAllCaps="false"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/text_regular_2x"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btnSave"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:background="@drawable/background_button_accent"
+            android:fontFamily="serif"
+            android:gravity="center"
+            android:text="@string/lbl_save"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_regular_2x"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+</LinearLayout>

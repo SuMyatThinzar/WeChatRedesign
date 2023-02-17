@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Android/AndroidStudioProjects/WeChatRedesign/app/src/main/res/drawable/background_birthday_spinner.xml" value="0.113" />
+        <entry key="..\:/Android/AndroidStudioProjects/WeChatRedesign/app/src/main/res/drawable/background_bottom_bar.xml" value="0.115" />
+        <entry key="..\:/Android/AndroidStudioProjects/WeChatRedesign/app/src/main/res/drawable/background_button_accent.xml" value="0.127" />
+        <entry key="..\:/Android/AndroidStudioProjects/WeChatRedesign/app/src/main/res/drawable/background_button_inactive.xml" value="0.1295" />
+        <entry key="..\:/Android/AndroidStudioProjects/WeChatRedesign/app/src/main/res/drawable/background_button_sign_up.xml" value="0.127" />
+        <entry key="..\:/Android/AndroidStudioProjects/WeChatRedesign/app/src/main/res/drawable/background_check_box_contacts.xml" value="0.122" />
+        <entry key="..\:/Android/AndroidStudioProjects/WeChatRedesign/app/src/main/res/drawable/background_gender.xml" value="0.115" />
+        <entry key="..\:/Android/AndroidStudioProjects/WeChatRedesign/app/src/main/res/drawable/background_line.xml" value="0.1125" />
+        <entry key="..\:/Android/AndroidStudioProjects/WeChatRedesign/app/src/main/res/drawable/background_message_white.xml" value="0.115" />
+        <entry key="..\:/Android/AndroidStudioProjects/WeChatRedesign/app/src/main/res/drawable/background_otp.xml" value="0.1295" />
+        <entry key="..\:/Android/AndroidStudioProjects/WeChatRedesign/app/src/main/res/drawable/background_spinner.xml" value="0.113" />
+        <entry key="..\:/Android/AndroidStudioProjects/WeChatRedesign/app/src/main/res/drawable/backgrounddd.xml" value="0.1125" />
+        <entry key="..\:/Android/AndroidStudioProjects/WeChatRedesign/app/src/main/res/drawable/shadow.xml" value="0.115" />
+        <entry key="..\:/Android/AndroidStudioProjects/WeChatRedesign/app/src/main/res/layout/activity_chat_thread.xml" value="0.264" />
+        <entry key="..\:/Android/AndroidStudioProjects/WeChatRedesign/app/src/main/res/layout/activity_login.xml" value="0.264" />
+        <entry key="..\:/Android/AndroidStudioProjects/WeChatRedesign/app/src/main/res/layout/activity_main.xml" value="0.176" />
+        <entry key="..\:/Android/AndroidStudioProjects/WeChatRedesign/app/src/main/res/layout/activity_main_screen.xml" value="0.264" />
+        <entry key="..\:/Android/AndroidStudioProjects/WeChatRedesign/app/src/main/res/layout/activity_moments.xml" value="0.264" />
+        <entry key="..\:/Android/AndroidStudioProjects/WeChatRedesign/app/src/main/res/layout/activity_new_group.xml" value="0.2" />
+        <entry key="..\:/Android/AndroidStudioProjects/WeChatRedesign/app/src/main/res/layout/activity_new_moment.xml" value="0.2" />
+        <entry key="..\:/Android/AndroidStudioProjects/WeChatRedesign/app/src/main/res/layout/activity_sign_up.xml" value="0.264" />
+        <entry key="..\:/Android/AndroidStudioProjects/WeChatRedesign/app/src/main/res/layout/activity_sign_up_profile.xml" value="0.4" />
+        <entry key="..\:/Android/AndroidStudioProjects/WeChatRedesign/app/src/main/res/layout/activity_splash.xml" value="0.264" />
+        <entry key="..\:/Android/AndroidStudioProjects/WeChatRedesign/app/src/main/res/layout/dialog_qr_code.xml" value="0.10746720484359233" />
+        <entry key="..\:/Android/AndroidStudioProjects/WeChatRedesign/app/src/main/res/layout/dialog_user_profile.xml" value="0.264" />
+        <entry key="..\:/Android/AndroidStudioProjects/WeChatRedesign/app/src/main/res/layout/fragment_chat.xml" value="0.264" />
+        <entry key="..\:/Android/AndroidStudioProjects/WeChatRedesign/app/src/main/res/layout/fragment_contacts.xml" value="0.264" />
+        <entry key="..\:/Android/AndroidStudioProjects/WeChatRedesign/app/src/main/res/layout/fragment_moments.xml" value="0.19555143651529194" />
+        <entry key="..\:/Android/AndroidStudioProjects/WeChatRedesign/app/src/main/res/layout/fragment_my.xml" value="0.2" />
+        <entry key="..\:/Android/AndroidStudioProjects/WeChatRedesign/app/src/main/res/layout/fragment_setting.xml" value="0.1716485507246377" />
+        <entry key="..\:/Android/AndroidStudioProjects/WeChatRedesign/app/src/main/res/layout/view_holder_active_people.xml" value="0.8800000000000001" />
+        <entry key="..\:/Android/AndroidStudioProjects/WeChatRedesign/app/src/main/res/layout/view_holder_chat.xml" value="0.264" />
+        <entry key="..\:/Android/AndroidStudioProjects/WeChatRedesign/app/src/main/res/layout/view_holder_check_contacts_new_group.xml" value="0.264" />
+        <entry key="..\:/Android/AndroidStudioProjects/WeChatRedesign/app/src/main/res/layout/view_holder_contacts.xml" value="0.264" />
+        <entry key="..\:/Android/AndroidStudioProjects/WeChatRedesign/app/src/main/res/layout/view_holder_group.xml" value="0.4" />
+        <entry key="..\:/Android/AndroidStudioProjects/WeChatRedesign/app/src/main/res/layout/view_holder_group_chat_fragment.xml" value="0.21195652173913043" />
+        <entry key="..\:/Android/AndroidStudioProjects/WeChatRedesign/app/src/main/res/layout/view_holder_group_last_message.xml" value="0.21195652173913043" />
+        <entry key="..\:/Android/AndroidStudioProjects/WeChatRedesign/app/src/main/res/layout/view_holder_messages.xml" value="0.264" />
+        <entry key="..\:/Android/AndroidStudioProjects/WeChatRedesign/app/src/main/res/layout/view_holder_moment.xml" value="0.264" />
+        <entry key="..\:/Android/AndroidStudioProjects/WeChatRedesign/app/src/main/res/layout/view_holder_moment_photo_portrait.xml" value="0.1716485507246377" />
+        <entry key="..\:/Android/AndroidStudioProjects/WeChatRedesign/app/src/main/res/layout/view_holder_selected_contacts.xml" value="0.21195652173913043" />
+        <entry key="..\:/Android/AndroidStudioProjects/WeChatRedesign/app/src/main/res/layout/view_holder_selected_contacts_new_group.xml" value="0.176" />
+        <entry key="..\:/Android/AndroidStudioProjects/WeChatRedesign/app/src/main/res/layout/view_holder_selected_photo.xml" value="0.25662650602409637" />
+        <entry key="..\:/Android/AndroidStudioProjects/WeChatRedesign/app/src/main/res/layout/view_item_moment_photo_portrait.xml" value="0.2" />
+        <entry key="..\:/Android/AndroidStudioProjects/WeChatRedesign/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.221875" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

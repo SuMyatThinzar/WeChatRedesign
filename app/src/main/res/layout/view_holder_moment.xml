@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/margin_medium_3"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_medium_2"
+        android:layout_marginEnd="@dimen/margin_medium_2">
+
+        <com.padcmyanmar.smtz.wechatredesign.views.components.RoundCornerImageView
+            android:id="@+id/ivProfileMoments"
+            android:layout_width="@dimen/margin_xxlarge"
+            android:layout_height="@dimen/margin_xxlarge"
+            android:scaleType="centerCrop"
+            android:src="@drawable/profile"
+            app:cornerRadius="@dimen/margin_large" />
+
+        <TextView
+            android:id="@+id/tvUserNameMoments"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_medium"
+            android:layout_toEndOf="@id/ivProfileMoments"
+            android:text="Michael"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/text_regular_2x"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvPostedTimeMoments"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvUserNameMoments"
+            android:layout_marginStart="@dimen/margin_medium"
+            android:layout_toEndOf="@id/ivProfileMoments"
+            android:text="15 min ago" />
+
+        <ImageView
+            android:layout_width="@dimen/margin_medium_3"
+            android:layout_height="@dimen/margin_medium_3"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/ic_more" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tvContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_medium_2"
+        android:layout_marginEnd="@dimen/margin_medium_2"
+        android:layout_marginTop="@dimen/margin_medium"
+        android:layout_marginBottom="@dimen/margin_medium"
+        android:textStyle="bold"
+        android:textColor="@color/colorAccent"
+        android:text="Nice !" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvMomentPhotos"
+        android:layout_width="wrap_content"
+        android:layout_height="200dp"
+        android:paddingStart="@dimen/margin_medium_2"
+        android:clipToPadding="false"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_medium_2">
+
+        <ImageView
+            android:id="@+id/btnLike"
+            android:layout_width="@dimen/margin_large"
+            android:layout_height="@dimen/margin_large"
+            android:src="@drawable/ic_heart" />
+
+        <TextView
+            android:id="@+id/tvLikeCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_small"
+            android:layout_marginTop="2dp"
+            android:layout_toEndOf="@id/btnLike"
+            android:text="10"
+            android:textColor="@color/colorAccent"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/btnBookmark"
+            android:layout_width="@dimen/margin_large"
+            android:layout_height="@dimen/margin_large"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/ic_bookmark" />
+        <TextView
+            android:id="@+id/tvCommentCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="@dimen/margin_medium"
+            android:layout_toStartOf="@id/btnBookmark"
+            android:textColor="@color/colorAccent"
+            android:textStyle="bold"/>
+        <ImageView
+            android:layout_width="@dimen/margin_large"
+            android:layout_height="@dimen/margin_large"
+            android:layout_toStartOf="@id/tvCommentCount"
+            android:layout_marginEnd="@dimen/margin_small"
+            android:src="@drawable/ic_comment"/>
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@drawable/background_line"/>
+
+</LinearLayout>

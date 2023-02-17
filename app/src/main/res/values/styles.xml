@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="TextAppearance">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/text_heading_1x</item>
+        <item name="fontFamily">serif</item>
+    </style>
+    <style name="TextAppearanceCreateMoment">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/text_regular_3x</item>
+        <item name="fontFamily">serif</item>
+    </style>
+    <style name="TextAppearanceBottomNavigationLabel">
+        <item name="android:textStyle">bold</item>
+        <item name="fontFamily">serif</item>
+    </style>
+</resources>
