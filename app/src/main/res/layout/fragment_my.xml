@@ -29,7 +29,7 @@
                 android:background="@drawable/background_button_accent"
                 android:elevation="2dp">
 
-                <com.padcmyanmar.smtz.wechatredesign.views.components.RoundCornerImageView
+                <ImageView
                     android:layout_width="@dimen/margin_medium_2"
                     android:layout_height="@dimen/margin_medium_2"
                     android:layout_gravity="center"
