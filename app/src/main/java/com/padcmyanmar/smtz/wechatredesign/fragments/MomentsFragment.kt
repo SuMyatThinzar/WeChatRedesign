@@ -66,7 +66,7 @@ class MomentsFragment(private val user: UserVO) : Fragment(), MomentsView {
         rvMoment.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
     }
 
-    override fun setUserList(users: List<UserVO>) {
+    override fun setAllUserList(users: List<UserVO>) {
         mUserList = users
     }
 

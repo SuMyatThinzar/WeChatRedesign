@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.padcmyanmar.smtz.wechatredesign.R
 import com.padcmyanmar.smtz.wechatredesign.data.vos.UserVO
-import com.padcmyanmar.smtz.wechatredesign.views.viewholders.SelectedContactsViewHolder
+import com.padcmyanmar.smtz.wechatredesign.viewholders.SelectedContactsViewHolder
 
 class SelectedContactsAdapter : RecyclerView.Adapter<SelectedContactsViewHolder>() {
 

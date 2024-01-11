@@ -7,10 +7,8 @@ import android.graphics.Bitmap
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
 import com.padcmyanmar.smtz.wechatredesign.R
 import com.padcmyanmar.smtz.wechatredesign.adapters.MessageAdapter
@@ -18,21 +16,15 @@ import com.padcmyanmar.smtz.wechatredesign.adapters.SelectedMessagePhotoAdapter
 import com.padcmyanmar.smtz.wechatredesign.data.vos.GroupVO
 import com.padcmyanmar.smtz.wechatredesign.data.vos.MessageVO
 import com.padcmyanmar.smtz.wechatredesign.data.vos.UserVO
-import com.padcmyanmar.smtz.wechatredesign.mvp.presenters.ChatThreadGroupPresenter
-import com.padcmyanmar.smtz.wechatredesign.mvp.presenters.ChatThreadGroupPresenterImpl
-import com.padcmyanmar.smtz.wechatredesign.mvp.presenters.ChatThreadPresenter
-import com.padcmyanmar.smtz.wechatredesign.mvp.presenters.ChatThreadPresenterImpl
+import com.padcmyanmar.smtz.wechatredesign.mvp.presenters.activityPresenters.ChatThreadGroupPresenter
+import com.padcmyanmar.smtz.wechatredesign.mvp.presenters.activityPresenters.ChatThreadGroupPresenterImpl
 import com.padcmyanmar.smtz.wechatredesign.mvp.views.ChatThreadGroupView
-import com.padcmyanmar.smtz.wechatredesign.mvp.views.ChatThreadView
 import com.padcmyanmar.smtz.wechatredesign.utils.loadBitmapFromUri
 import com.padcmyanmar.smtz.wechatredesign.utils.scaleToRatio
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import io.reactivex.rxjava3.core.Observable
 import kotlinx.android.synthetic.main.activity_chat_thread.*
-import kotlinx.android.synthetic.main.activity_chat_thread.ivFriendProfile
-import kotlinx.android.synthetic.main.view_holder_messages.*
-import org.checkerframework.checker.units.qual.m
 
 class ChatThreadGroupActivity : AppCompatActivity(), ChatThreadGroupView {
 

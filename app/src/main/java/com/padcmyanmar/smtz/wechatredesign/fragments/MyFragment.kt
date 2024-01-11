@@ -27,15 +27,15 @@ import com.padcmyanmar.smtz.wechatredesign.mvp.presenters.fragmentPresenters.MyP
 import com.padcmyanmar.smtz.wechatredesign.mvp.views.MyView
 import com.padcmyanmar.smtz.wechatredesign.utils.customPrefs
 import com.padcmyanmar.smtz.wechatredesign.utils.set
-import com.padcmyanmar.smtz.wechatredesign.views.dialogs.QRCodeDialogFragment
-import com.padcmyanmar.smtz.wechatredesign.views.dialogs.UserProfileDialogFragment
-import com.padcmyanmar.smtz.wechatredesign.views.dialogs.UserProfileDialogFragment.Companion.BUNDLE_DATE_OF_BIRTH
-import com.padcmyanmar.smtz.wechatredesign.views.dialogs.UserProfileDialogFragment.Companion.BUNDLE_GENDER
-import com.padcmyanmar.smtz.wechatredesign.views.dialogs.UserProfileDialogFragment.Companion.BUNDLE_NAME
-import com.padcmyanmar.smtz.wechatredesign.views.dialogs.UserProfileDialogFragment.Companion.BUNDLE_PASSWORD
-import com.padcmyanmar.smtz.wechatredesign.views.dialogs.UserProfileDialogFragment.Companion.BUNDLE_PHONE_NUMBER
-import com.padcmyanmar.smtz.wechatredesign.views.dialogs.UserProfileDialogFragment.Companion.BUNDLE_PROFILE
-import com.padcmyanmar.smtz.wechatredesign.views.dialogs.UserProfileDialogFragment.Companion.BUNDLE_UID
+import com.padcmyanmar.smtz.wechatredesign.dialogs.QRCodeDialogFragment
+import com.padcmyanmar.smtz.wechatredesign.dialogs.UserProfileDialogFragment
+import com.padcmyanmar.smtz.wechatredesign.dialogs.UserProfileDialogFragment.Companion.BUNDLE_DATE_OF_BIRTH
+import com.padcmyanmar.smtz.wechatredesign.dialogs.UserProfileDialogFragment.Companion.BUNDLE_GENDER
+import com.padcmyanmar.smtz.wechatredesign.dialogs.UserProfileDialogFragment.Companion.BUNDLE_NAME
+import com.padcmyanmar.smtz.wechatredesign.dialogs.UserProfileDialogFragment.Companion.BUNDLE_PASSWORD
+import com.padcmyanmar.smtz.wechatredesign.dialogs.UserProfileDialogFragment.Companion.BUNDLE_PHONE_NUMBER
+import com.padcmyanmar.smtz.wechatredesign.dialogs.UserProfileDialogFragment.Companion.BUNDLE_PROFILE
+import com.padcmyanmar.smtz.wechatredesign.dialogs.UserProfileDialogFragment.Companion.BUNDLE_UID
 import kotlinx.android.synthetic.main.fragment_moments.toolBar
 import kotlinx.android.synthetic.main.fragment_my.*
 import java.io.IOException
@@ -161,8 +161,7 @@ class MyFragment(private val mUser: UserVO) : Fragment(), MyView {
 
         // clear activity history
         val newIntent = Intent(requireContext(), LoginActivity::class.java)
-        newIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-        newIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        newIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(newIntent)
     }
 

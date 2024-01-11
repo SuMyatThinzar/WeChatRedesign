@@ -17,6 +17,7 @@ interface FirestoreApi {
         profile: String
     )
 
+    
     fun getUser(uid: String, onSuccess: (user: UserVO) -> Unit, onFailure: (String) -> Unit)
 
     fun getAllUsers(onSuccess: (List<UserVO>) -> Unit, onFailure: (String) -> Unit)

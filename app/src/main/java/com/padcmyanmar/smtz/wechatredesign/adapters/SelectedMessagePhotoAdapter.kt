@@ -6,8 +6,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.padcmyanmar.smtz.wechatredesign.R
-import com.padcmyanmar.smtz.wechatredesign.views.viewholders.SelectedMessagePhotoViewHolder
-import com.padcmyanmar.smtz.wechatredesign.views.viewholders.SelectedPhotoViewHolder
+import com.padcmyanmar.smtz.wechatredesign.viewholders.SelectedMessagePhotoViewHolder
+import com.padcmyanmar.smtz.wechatredesign.viewholders.SelectedPhotoViewHolder
 
 class SelectedMessagePhotoAdapter : RecyclerView.Adapter<SelectedMessagePhotoViewHolder>() {
 

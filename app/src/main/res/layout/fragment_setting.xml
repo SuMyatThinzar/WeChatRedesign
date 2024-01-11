@@ -27,7 +27,7 @@
                 android:elevation="2dp"
                 android:background="@drawable/background_button_accent">
 
-                <com.padcmyanmar.smtz.wechatredesign.views.components.RoundCornerImageView
+                <com.padcmyanmar.smtz.wechatredesign.components.RoundCornerImageView
                     android:id="@+id/btnNewMoment"
                     android:layout_width="@dimen/margin_medium_3"
                     android:layout_height="@dimen/margin_medium_3"

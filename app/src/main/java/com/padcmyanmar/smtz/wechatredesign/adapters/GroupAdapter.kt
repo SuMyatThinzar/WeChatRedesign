@@ -7,7 +7,7 @@ import com.padcmyanmar.smtz.wechatredesign.R
 import com.padcmyanmar.smtz.wechatredesign.data.vos.GroupVO
 import com.padcmyanmar.smtz.wechatredesign.data.vos.UserVO
 import com.padcmyanmar.smtz.wechatredesign.delegates.GroupToChatThreadDelegate
-import com.padcmyanmar.smtz.wechatredesign.views.viewholders.GroupViewHolder
+import com.padcmyanmar.smtz.wechatredesign.viewholders.GroupViewHolder
 
 class GroupAdapter(private var mDelegate: GroupToChatThreadDelegate, private val loggedInUser: UserVO) : RecyclerView.Adapter<GroupViewHolder>() {
 

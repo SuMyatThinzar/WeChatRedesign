@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.padcmyanmar.smtz.wechatredesign.R
 import com.padcmyanmar.smtz.wechatredesign.data.vos.UserVO
 import com.padcmyanmar.smtz.wechatredesign.delegates.ChatThreadDelegate
-import com.padcmyanmar.smtz.wechatredesign.views.viewholders.ContactViewHolder
+import com.padcmyanmar.smtz.wechatredesign.viewholders.ContactViewHolder
 
 class ContactAdapter(private var mDelegate: ChatThreadDelegate, private val loggedInUserUid: String) : RecyclerView.Adapter<ContactViewHolder>() {
 

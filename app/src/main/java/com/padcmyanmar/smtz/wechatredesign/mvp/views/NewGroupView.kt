@@ -4,5 +4,7 @@ import com.padcmyanmar.smtz.wechatredesign.data.vos.UserVO
 
 interface NewGroupView : BaseView{
     fun showContactList(contacts: List<UserVO>)
+    fun showEmptyView()
+    fun hideEmptyView()
     fun setSelectedContacts(contact: UserVO)
 }

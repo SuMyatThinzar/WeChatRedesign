@@ -36,6 +36,7 @@ object RealtimeDatabaseImpl : RealtimeApi {
             .child(secondPersonUID)
             .child(millis.toString())      // key
             .setValue(MessageVO(millis, message, senderUID, senderName, senderProfile, file))
+//            .addOnCompleteListener {  }  to handle success and failure of adding to database (one-time)
     }
 
     override fun getMessagesOfSpecificContact(
@@ -48,7 +49,7 @@ object RealtimeDatabaseImpl : RealtimeApi {
             .child("contactsAndMessages")
             .child(firstPersonUID)
             .child(secondPersonUID)  // key-value    value တွေကို loop ပတ်ပြီး ArrayList တစ်ခုထဲကို ပြန်ထည့်ပြီးသိမ်း
-            .addValueEventListener(object : ValueEventListener {
+            .addValueEventListener(object : ValueEventListener {     // real-time  addListenerForSingleValueEvent = one-time
 
             override fun onCancelled(error: DatabaseError) {
                 onFailure(error.message)

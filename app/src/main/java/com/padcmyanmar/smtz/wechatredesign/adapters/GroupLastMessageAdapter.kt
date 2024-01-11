@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.padcmyanmar.smtz.wechatredesign.R
 import com.padcmyanmar.smtz.wechatredesign.data.vos.UserVO
 import com.padcmyanmar.smtz.wechatredesign.delegates.GroupToChatThreadDelegate
-import com.padcmyanmar.smtz.wechatredesign.views.viewholders.GroupLastMessageViewHolder
+import com.padcmyanmar.smtz.wechatredesign.viewholders.GroupLastMessageViewHolder
 
 class GroupLastMessageAdapter(private val mDelegate: GroupToChatThreadDelegate, private var currentUser: UserVO) : RecyclerView.Adapter<GroupLastMessageViewHolder>() {
 

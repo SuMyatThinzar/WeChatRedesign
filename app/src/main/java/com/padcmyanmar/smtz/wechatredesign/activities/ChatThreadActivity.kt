@@ -7,7 +7,6 @@ import android.graphics.Bitmap
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
@@ -15,11 +14,10 @@ import com.google.android.material.snackbar.Snackbar
 import com.padcmyanmar.smtz.wechatredesign.R
 import com.padcmyanmar.smtz.wechatredesign.adapters.MessageAdapter
 import com.padcmyanmar.smtz.wechatredesign.adapters.SelectedMessagePhotoAdapter
-import com.padcmyanmar.smtz.wechatredesign.adapters.SelectedPhotoAdapter
 import com.padcmyanmar.smtz.wechatredesign.data.vos.MessageVO
 import com.padcmyanmar.smtz.wechatredesign.data.vos.UserVO
-import com.padcmyanmar.smtz.wechatredesign.mvp.presenters.ChatThreadPresenter
-import com.padcmyanmar.smtz.wechatredesign.mvp.presenters.ChatThreadPresenterImpl
+import com.padcmyanmar.smtz.wechatredesign.mvp.presenters.activityPresenters.ChatThreadPresenter
+import com.padcmyanmar.smtz.wechatredesign.mvp.presenters.activityPresenters.ChatThreadPresenterImpl
 import com.padcmyanmar.smtz.wechatredesign.mvp.views.ChatThreadView
 import com.padcmyanmar.smtz.wechatredesign.utils.loadBitmapFromUri
 import com.padcmyanmar.smtz.wechatredesign.utils.scaleToRatio

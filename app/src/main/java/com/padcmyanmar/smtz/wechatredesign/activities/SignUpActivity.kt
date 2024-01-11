@@ -13,8 +13,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.snackbar.Snackbar
 import com.padcmyanmar.smtz.wechatredesign.R
-import com.padcmyanmar.smtz.wechatredesign.mvp.presenters.SignUpPresenter
-import com.padcmyanmar.smtz.wechatredesign.mvp.presenters.SignUpPresenterImpl
+import com.padcmyanmar.smtz.wechatredesign.mvp.presenters.activityPresenters.SignUpPresenter
+import com.padcmyanmar.smtz.wechatredesign.mvp.presenters.activityPresenters.SignUpPresenterImpl
 import com.padcmyanmar.smtz.wechatredesign.mvp.views.SignUpView
 import kotlinx.android.synthetic.main.activity_sign_up.*
 
@@ -86,6 +86,7 @@ fun View.hideKeyboard() {
     inputManager.hideSoftInputFromWindow(windowToken, 0)
 }
 
+// for delete
 class GenericKeyEvent internal constructor(
     private val currentView: EditText,
     private val previousView: EditText?
@@ -103,6 +104,7 @@ class GenericKeyEvent internal constructor(
     }
 }
 
+// for input, if et1 has already one char, replace it and focus et2
 class GenericTextWatcher internal constructor(
     private val currentView: View,
     private val nextView: View?

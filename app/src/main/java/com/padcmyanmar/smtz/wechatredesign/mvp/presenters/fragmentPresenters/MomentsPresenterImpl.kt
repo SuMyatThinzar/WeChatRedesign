@@ -5,7 +5,7 @@ import com.padcmyanmar.smtz.wechatredesign.data.models.UserModel
 import com.padcmyanmar.smtz.wechatredesign.data.models.UserModelImpl
 import com.padcmyanmar.smtz.wechatredesign.data.vos.MomentVO
 import com.padcmyanmar.smtz.wechatredesign.data.vos.UserVO
-import com.padcmyanmar.smtz.wechatredesign.mvp.presenters.AbstractBasePresenter
+import com.padcmyanmar.smtz.wechatredesign.mvp.presenters.activityPresenters.AbstractBasePresenter
 import com.padcmyanmar.smtz.wechatredesign.mvp.views.MomentsView
 
 class MomentsPresenterImpl : MomentsPresenter, AbstractBasePresenter<MomentsView>() {
@@ -20,7 +20,7 @@ class MomentsPresenterImpl : MomentsPresenter, AbstractBasePresenter<MomentsView
             userList.forEach { user ->
                 mUserList.add(user)
             }
-            mView.setUserList(mUserList)
+            mView.setAllUserList(mUserList)
         }, onFailure = {})
 
 

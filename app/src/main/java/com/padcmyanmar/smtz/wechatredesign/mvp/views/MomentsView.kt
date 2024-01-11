@@ -5,5 +5,5 @@ import com.padcmyanmar.smtz.wechatredesign.data.vos.UserVO
 
 interface MomentsView : BaseView {
     fun showMomentsData(moments: List<MomentVO>)
-    fun setUserList(users: List<UserVO>)
+    fun setAllUserList(users: List<UserVO>)
 }

@@ -5,7 +5,7 @@ import com.padcmyanmar.smtz.wechatredesign.data.models.UserModel
 import com.padcmyanmar.smtz.wechatredesign.data.models.UserModelImpl
 import com.padcmyanmar.smtz.wechatredesign.data.vos.GroupVO
 import com.padcmyanmar.smtz.wechatredesign.data.vos.UserVO
-import com.padcmyanmar.smtz.wechatredesign.mvp.presenters.AbstractBasePresenter
+import com.padcmyanmar.smtz.wechatredesign.mvp.presenters.activityPresenters.AbstractBasePresenter
 import com.padcmyanmar.smtz.wechatredesign.mvp.views.ChatView
 
 class ChatPresenterImpl : ChatPresenter, AbstractBasePresenter<ChatView>() {

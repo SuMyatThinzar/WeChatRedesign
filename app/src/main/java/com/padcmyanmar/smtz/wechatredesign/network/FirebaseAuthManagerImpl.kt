@@ -48,7 +48,6 @@ object FirebaseAuthManagerImpl : AuthManager {
                 // create user in cloud firestore
                 val userUID = user?.uid
                 mFirestoreApi.addUser(phone, password, userName, dateOfBirth, gender, userUID?:"", "")
-//                    Log.d("test" , "$phone $password $userName $dateOfBirth $gender ${userUID}}")
                 userUID?.let{ uid ->
                     onSuccess(uid)
                 }

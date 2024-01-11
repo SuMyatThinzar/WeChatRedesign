@@ -10,7 +10,7 @@
         android:layout_marginStart="@dimen/margin_medium"
         app:cardCornerRadius="@dimen/margin_medium">
 
-        <com.padcmyanmar.smtz.wechatredesign.views.components.RoundCornerImageView
+        <com.padcmyanmar.smtz.wechatredesign.components.RoundCornerImageView
             android:id="@+id/ivGroupImage"
             android:layout_width="60dp"
             android:layout_height="60dp"

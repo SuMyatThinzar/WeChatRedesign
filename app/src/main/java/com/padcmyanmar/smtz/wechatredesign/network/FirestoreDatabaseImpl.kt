@@ -140,8 +140,7 @@ object FirestoreDatabaseImpl : FirestoreApi {
         imageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
         val data = baos.toByteArray()                   // Bitmap -> ByeArray
 
-        val imageRef =
-            storageReference.child("images/${UUID.randomUUID()}")  // သိမ်းမယ့်နေရာရဲ့ reference
+        val imageRef = storageReference.child("images/${UUID.randomUUID()}")  // သိမ်းမယ့်နေရာရဲ့ reference
         val uploadTask = imageRef.putBytes(data)
 
         uploadTask.continueWithTask {

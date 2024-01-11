@@ -8,6 +8,7 @@ import android.graphics.ImageDecoder
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
+import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -20,8 +21,8 @@ import com.padcmyanmar.smtz.wechatredesign.data.models.UserModel
 import com.padcmyanmar.smtz.wechatredesign.data.models.UserModelImpl
 import com.padcmyanmar.smtz.wechatredesign.data.vos.UserVO
 import com.padcmyanmar.smtz.wechatredesign.fragments.MyFragment
-import com.padcmyanmar.smtz.wechatredesign.mvp.presenters.NewMomentPresenter
-import com.padcmyanmar.smtz.wechatredesign.mvp.presenters.NewMomentPresenterImpl
+import com.padcmyanmar.smtz.wechatredesign.mvp.presenters.activityPresenters.NewMomentPresenter
+import com.padcmyanmar.smtz.wechatredesign.mvp.presenters.activityPresenters.NewMomentPresenterImpl
 import com.padcmyanmar.smtz.wechatredesign.mvp.views.NewMomentView
 import kotlinx.android.synthetic.main.activity_new_moment.*
 import java.io.IOException
@@ -124,6 +125,14 @@ class NewMomentActivity : AppCompatActivity(), NewMomentView {
 
     override fun setUpImageStringArray(imageString: String) {
         photoListString.add(imageString)
+    }
+
+    override fun showProgressBar() {
+        progressBar.visibility = View.VISIBLE
+    }
+
+    override fun hideProgressBar() {
+        progressBar.visibility = View.GONE
     }
 
     @RequiresApi(Build.VERSION_CODES.P)

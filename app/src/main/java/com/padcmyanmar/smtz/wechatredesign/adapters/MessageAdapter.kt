@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.padcmyanmar.smtz.wechatredesign.R
 import com.padcmyanmar.smtz.wechatredesign.data.vos.MessageVO
-import com.padcmyanmar.smtz.wechatredesign.views.viewholders.MessagesViewHolder
+import com.padcmyanmar.smtz.wechatredesign.viewholders.MessagesViewHolder
 
 class MessageAdapter(private val loggedInUser: String) : RecyclerView.Adapter<MessagesViewHolder>() {
 

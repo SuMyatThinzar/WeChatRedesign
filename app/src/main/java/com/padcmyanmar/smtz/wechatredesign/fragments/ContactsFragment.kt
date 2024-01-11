@@ -23,10 +23,8 @@ import com.padcmyanmar.smtz.wechatredesign.data.vos.UserVO
 import com.padcmyanmar.smtz.wechatredesign.mvp.presenters.fragmentPresenters.ContactsPresenter
 import com.padcmyanmar.smtz.wechatredesign.mvp.presenters.fragmentPresenters.ContactsPresenterImpl
 import com.padcmyanmar.smtz.wechatredesign.mvp.views.ContactsView
-import com.padcmyanmar.smtz.wechatredesign.views.dialogs.UserProfileDialogFragment
 import kotlinx.android.synthetic.main.fragment_contacts.*
 import kotlinx.android.synthetic.main.fragment_moments.toolBar
-
 
 class ContactsFragment : Fragment(), ContactsView {
 
@@ -122,6 +120,14 @@ class ContactsFragment : Fragment(), ContactsView {
 
     override fun showContactsData(contacts: List<UserVO>) {
         mContactAdapter.setNewData(contacts)
+    }
+
+    override fun hideContactListView() {
+        rvContacts.visibility = View.GONE
+    }
+
+    override fun showContactListView() {
+        rvContacts.visibility = View.VISIBLE
     }
 
     override fun navigateToChatThread(loggedInUserUID: String, contactUID: String) {

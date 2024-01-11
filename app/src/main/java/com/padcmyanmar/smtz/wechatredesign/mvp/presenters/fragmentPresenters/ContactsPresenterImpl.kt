@@ -5,7 +5,7 @@ import com.padcmyanmar.smtz.wechatredesign.data.models.UserModel
 import com.padcmyanmar.smtz.wechatredesign.data.models.UserModelImpl
 import com.padcmyanmar.smtz.wechatredesign.data.vos.GroupVO
 import com.padcmyanmar.smtz.wechatredesign.data.vos.UserVO
-import com.padcmyanmar.smtz.wechatredesign.mvp.presenters.AbstractBasePresenter
+import com.padcmyanmar.smtz.wechatredesign.mvp.presenters.activityPresenters.AbstractBasePresenter
 import com.padcmyanmar.smtz.wechatredesign.mvp.views.ContactsView
 
 class ContactsPresenterImpl : ContactsPresenter, AbstractBasePresenter<ContactsView>() {
@@ -16,8 +16,11 @@ class ContactsPresenterImpl : ContactsPresenter, AbstractBasePresenter<ContactsV
     override fun onUiReady(owner: LifecycleOwner, loggedInUserUID: String) {
         //contacts
         mUserModel.getContacts(loggedInUserUID, onSuccess = { contactList->
-            mView.showContactsData(contactList)
+            mView.showContactListView()
+            if (contactList.isNotEmpty()) mView.showContactsData(contactList)
+            else mView.hideContactListView()
         }, onFailure = {
+            mView.hideContactListView()
             mView.showError(it)
         })
 

@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.padcmyanmar.smtz.wechatredesign.R
 import com.padcmyanmar.smtz.wechatredesign.data.vos.UserVO
 import com.padcmyanmar.smtz.wechatredesign.delegates.SelectMemberDelegate
-import com.padcmyanmar.smtz.wechatredesign.views.viewholders.CheckContactsViewHolder
+import com.padcmyanmar.smtz.wechatredesign.viewholders.CheckContactsViewHolder
 
 class CheckContactsAdapter(private val mDelegate: SelectMemberDelegate) : RecyclerView.Adapter<CheckContactsViewHolder>() {
 

@@ -11,8 +11,8 @@ import com.padcmyanmar.smtz.wechatredesign.R
 import com.padcmyanmar.smtz.wechatredesign.data.vos.UserVO
 import com.padcmyanmar.smtz.wechatredesign.fragments.*
 import com.padcmyanmar.smtz.wechatredesign.fragments.ContactsFragment.Companion.BUNDLE_USER
-import com.padcmyanmar.smtz.wechatredesign.mvp.presenters.MainScreenPresenter
-import com.padcmyanmar.smtz.wechatredesign.mvp.presenters.MainScreenPresenterImpl
+import com.padcmyanmar.smtz.wechatredesign.mvp.presenters.activityPresenters.MainScreenPresenter
+import com.padcmyanmar.smtz.wechatredesign.mvp.presenters.activityPresenters.MainScreenPresenterImpl
 import com.padcmyanmar.smtz.wechatredesign.mvp.views.MainScreenView
 import kotlinx.android.synthetic.main.activity_main_screen.*
 

@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.padcmyanmar.smtz.wechatredesign.R
 import com.padcmyanmar.smtz.wechatredesign.data.vos.UserVO
-import com.padcmyanmar.smtz.wechatredesign.views.viewholders.ActivePeopleViewHolder
+import com.padcmyanmar.smtz.wechatredesign.viewholders.ActivePeopleViewHolder
 
 class ActivePeopleAdapter : RecyclerView.Adapter<ActivePeopleViewHolder>() {
 

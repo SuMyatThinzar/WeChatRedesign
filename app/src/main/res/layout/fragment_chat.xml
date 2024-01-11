@@ -27,7 +27,7 @@
                 android:background="@drawable/background_button_accent"
                 android:elevation="2dp">
 
-                <com.padcmyanmar.smtz.wechatredesign.views.components.RoundCornerImageView
+                <com.padcmyanmar.smtz.wechatredesign.components.RoundCornerImageView
                     android:id="@+id/btnNewMoment"
                     android:layout_width="@dimen/margin_medium_3"
                     android:layout_height="@dimen/margin_medium_3"
@@ -51,6 +51,7 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:visibility="invisible"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
         <LinearLayout
@@ -93,5 +94,22 @@
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
+
+    <LinearLayout
+        android:id="@+id/emptyViewChat"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="@color/colorAccent"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:textSize="@dimen/text_regular_3x"
+            android:text="No Chat yet. \nStart a new conversation!"/>
+
+    </LinearLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

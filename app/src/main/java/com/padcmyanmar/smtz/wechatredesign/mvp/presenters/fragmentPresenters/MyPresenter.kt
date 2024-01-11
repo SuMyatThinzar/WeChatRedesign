@@ -2,7 +2,7 @@ package com.padcmyanmar.smtz.wechatredesign.mvp.presenters.fragmentPresenters
 
 import android.graphics.Bitmap
 import androidx.lifecycle.LifecycleOwner
-import com.padc.grocery.mvp.presenters.BasePresenter
+import com.padcmyanmar.smtz.wechatredesign.mvp.presenters.activityPresenters.BasePresenter
 import com.padcmyanmar.smtz.wechatredesign.data.vos.UserVO
 import com.padcmyanmar.smtz.wechatredesign.mvp.views.MyView
 

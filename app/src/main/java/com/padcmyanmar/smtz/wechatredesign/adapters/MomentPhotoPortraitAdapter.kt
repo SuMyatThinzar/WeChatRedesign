@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.padcmyanmar.smtz.wechatredesign.R
-import com.padcmyanmar.smtz.wechatredesign.views.viewholders.MomentPhotoPortraitViewHolder
+import com.padcmyanmar.smtz.wechatredesign.viewholders.MomentPhotoPortraitViewHolder
 
 class MomentPhotoPortraitAdapter : RecyclerView.Adapter<MomentPhotoPortraitViewHolder>() {
 

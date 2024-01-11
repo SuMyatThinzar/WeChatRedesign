@@ -7,7 +7,7 @@ import com.padcmyanmar.smtz.wechatredesign.R
 import com.padcmyanmar.smtz.wechatredesign.data.vos.MomentVO
 import com.padcmyanmar.smtz.wechatredesign.data.vos.UserVO
 import com.padcmyanmar.smtz.wechatredesign.delegates.MomentActionButtonsDelegate
-import com.padcmyanmar.smtz.wechatredesign.views.viewholders.MomentViewHolder
+import com.padcmyanmar.smtz.wechatredesign.viewholders.MomentViewHolder
 
 class MomentAdapter(private val mDelegate: MomentActionButtonsDelegate, val userUID: String) : RecyclerView.Adapter<MomentViewHolder>() {
 
@@ -20,8 +20,19 @@ class MomentAdapter(private val mDelegate: MomentActionButtonsDelegate, val user
     }
 
     override fun onBindViewHolder(holder: MomentViewHolder, position: Int) {
+
         if(mData.isNotEmpty()){
-            holder.bindData(mData[position], mUserList)
+
+            var eachUserProfile = UserVO()
+
+            mUserList.forEach {
+                if (it.userUID == mData[position].user) {
+                    eachUserProfile = it
+                    return@forEach
+                }
+            }
+
+            holder.bindData(mData[position], eachUserProfile)
         }
     }
 

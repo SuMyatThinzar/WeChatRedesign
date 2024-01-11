@@ -2,9 +2,9 @@ package com.padcmyanmar.smtz.wechatredesign.activities
 
 import android.content.Context
 import android.content.Intent
-import android.content.Intent.EXTRA_USER
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,8 +13,8 @@ import com.padcmyanmar.smtz.wechatredesign.R
 import com.padcmyanmar.smtz.wechatredesign.adapters.CheckContactsAdapter
 import com.padcmyanmar.smtz.wechatredesign.adapters.SelectedContactsAdapter
 import com.padcmyanmar.smtz.wechatredesign.data.vos.UserVO
-import com.padcmyanmar.smtz.wechatredesign.mvp.presenters.NewGroupPresenter
-import com.padcmyanmar.smtz.wechatredesign.mvp.presenters.NewGroupPresenterImpl
+import com.padcmyanmar.smtz.wechatredesign.mvp.presenters.activityPresenters.NewGroupPresenter
+import com.padcmyanmar.smtz.wechatredesign.mvp.presenters.activityPresenters.NewGroupPresenterImpl
 import com.padcmyanmar.smtz.wechatredesign.mvp.views.NewGroupView
 import kotlinx.android.synthetic.main.activity_new_group.*
 
@@ -90,6 +90,16 @@ class NewGroupActivity : AppCompatActivity(), NewGroupView {
     override fun showContactList(contacts: List<UserVO>) {
         mContacts = contacts
         mCheckContactAdapter.setNewData(contacts)
+    }
+
+    override fun showEmptyView() {
+        emptyViewContacts.visibility = View.VISIBLE
+        llContactListView.visibility = View.GONE
+    }
+
+    override fun hideEmptyView() {
+        emptyViewContacts.visibility = View.GONE
+        llContactListView.visibility = View.VISIBLE
     }
 
     override fun setSelectedContacts(contact: UserVO) {

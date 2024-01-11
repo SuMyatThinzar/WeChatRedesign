@@ -12,7 +12,7 @@
         android:layout_marginStart="@dimen/margin_medium_2"
         android:layout_marginEnd="@dimen/margin_medium_2">
 
-        <com.padcmyanmar.smtz.wechatredesign.views.components.RoundCornerImageView
+        <com.padcmyanmar.smtz.wechatredesign.components.RoundCornerImageView
             android:id="@+id/ivProfileMoments"
             android:layout_width="@dimen/margin_xxlarge"
             android:layout_height="@dimen/margin_xxlarge"

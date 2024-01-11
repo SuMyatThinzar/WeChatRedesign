@@ -5,8 +5,8 @@ import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.snackbar.Snackbar
 import com.padcmyanmar.smtz.wechatredesign.R
-import com.padcmyanmar.smtz.wechatredesign.mvp.presenters.LoginPresenter
-import com.padcmyanmar.smtz.wechatredesign.mvp.presenters.LoginPresenterImpl
+import com.padcmyanmar.smtz.wechatredesign.mvp.presenters.activityPresenters.LoginPresenter
+import com.padcmyanmar.smtz.wechatredesign.mvp.presenters.activityPresenters.LoginPresenterImpl
 import com.padcmyanmar.smtz.wechatredesign.mvp.views.LoginView
 import kotlinx.android.synthetic.main.activity_login.*
 

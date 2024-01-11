@@ -9,8 +9,8 @@ import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.snackbar.Snackbar
 import com.padcmyanmar.smtz.wechatredesign.R
-import com.padcmyanmar.smtz.wechatredesign.mvp.presenters.SplashPresenter
-import com.padcmyanmar.smtz.wechatredesign.mvp.presenters.SplashPresenterImpl
+import com.padcmyanmar.smtz.wechatredesign.mvp.presenters.activityPresenters.SplashPresenter
+import com.padcmyanmar.smtz.wechatredesign.mvp.presenters.activityPresenters.SplashPresenterImpl
 import com.padcmyanmar.smtz.wechatredesign.mvp.views.SplashScreenView
 import com.padcmyanmar.smtz.wechatredesign.utils.customPrefs
 import com.padcmyanmar.smtz.wechatredesign.utils.get
