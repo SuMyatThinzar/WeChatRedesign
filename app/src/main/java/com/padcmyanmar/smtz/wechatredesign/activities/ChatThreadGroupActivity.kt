@@ -73,7 +73,7 @@ class ChatThreadGroupActivity : AppCompatActivity(), ChatThreadGroupView {
     }
 
     private fun setUpListeners(){
-        btnBackChatThread.setOnClickListener { super.onBackPressed() }
+        btnBackChatThread.setOnClickListener { finish() }
 
         ivSendPicture.setOnClickListener {
             val intent = Intent()
@@ -99,7 +99,6 @@ class ChatThreadGroupActivity : AppCompatActivity(), ChatThreadGroupView {
                 etMessage.text = null
                 mChosenImagesBitmap = arrayListOf()
                 mSelectedPhotoAdapter.setNewData(mChosenImagesBitmap)
-
             }
         }
     }

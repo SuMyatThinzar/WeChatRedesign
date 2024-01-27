@@ -7,7 +7,9 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginStart="@dimen/margin_medium"
+        android:layout_marginStart="@dimen/margin_card_medium"
+        android:layout_marginEnd="@dimen/margin_card_medium"
+        android:layout_marginBottom="@dimen/margin_card_medium"
         app:cardCornerRadius="@dimen/margin_medium">
 
         <com.padcmyanmar.smtz.wechatredesign.components.RoundCornerImageView

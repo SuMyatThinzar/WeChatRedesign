@@ -192,12 +192,10 @@ class SignUpProfileActivity : AppCompatActivity(), SignUpProfileView {
             ) {
                 if (position != 0) {
                     val tutorialsName = parent.getItemAtPosition(position).toString()
-//                    Toast.makeText(parent.context, tutorialsName, Toast.LENGTH_LONG).show()
                 }
             }
 
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-            }
+            override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
 
         // Month
@@ -210,7 +208,6 @@ class SignUpProfileActivity : AppCompatActivity(), SignUpProfileView {
             ) {
                 if (position != 0) {
                     val tutorialsName = parent.getItemAtPosition(position).toString()
-//                    Toast.makeText(parent.context, tutorialsName, Toast.LENGTH_LONG).show()
                 }
             }
 

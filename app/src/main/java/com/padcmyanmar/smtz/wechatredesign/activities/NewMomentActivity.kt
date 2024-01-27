@@ -83,7 +83,7 @@ class NewMomentActivity : AppCompatActivity(), NewMomentView {
 
     private fun setUpListeners() {
         btnClose.setOnClickListener {
-            super.onBackPressed()
+            finish()
         }
 
         btnSelectPhoto.setOnClickListener {
@@ -97,7 +97,7 @@ class NewMomentActivity : AppCompatActivity(), NewMomentView {
 
             val content = etCreateMoment.text.toString().trim()
 
-            if(etCreateMoment.text.toString().trim().isNotEmpty() && photoListString.isNotEmpty()) {
+            if(etCreateMoment.text.toString().trim().isNotEmpty() || photoListString.isNotEmpty()) {
                 mPresenter.onTapCreate(
                     millis = millis,
                     likeCount = "0",
@@ -108,7 +108,7 @@ class NewMomentActivity : AppCompatActivity(), NewMomentView {
                     photoListString = photoListString
                 )
             }
-            onBackPressed()
+            finish()
         }
     }
 

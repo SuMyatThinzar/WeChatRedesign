@@ -109,7 +109,7 @@ class ChatThreadActivity : AppCompatActivity(), ChatThreadView {
         if(resultCode == Activity.RESULT_OK && requestCode == PICK_IMAGE_REQUEST) {
             val imageUri: Uri? = data?.data
 
-            imageUri?.let{ image ->
+            imageUri?.let { image ->
                 Observable.just(image)
                     .map { it.loadBitmapFromUri(applicationContext) }
                     .map { it.scaleToRatio(0.35) }

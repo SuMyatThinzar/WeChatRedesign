@@ -42,16 +42,9 @@ class MainScreenActivity : AppCompatActivity(), MainScreenView {
         setContentView(R.layout.activity_main_screen)
         setUpPresenter()
 
-//        setUpBottomNavigation()
-
         intent.getStringExtra(EXTRA_USER_UID)?.let { uid = it }
 
         mPresenter.onUiReady(this, uid)
-
-
-//        if (savedInstanceState == null) {
-//            setUpBottomNavigation(mUserVO, 0)
-//        }
     }
 
     private fun setUpPresenter() {

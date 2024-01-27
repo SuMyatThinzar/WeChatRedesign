@@ -46,7 +46,6 @@
                     android:layout_height="match_parent"
                     android:src="@drawable/border" />
 
-
             </androidx.cardview.widget.CardView>
 
         </FrameLayout>
@@ -69,8 +68,8 @@
 
             <ImageView
                 android:id="@+id/ivCheckContact"
-                android:layout_width="@dimen/margin_large"
-                android:layout_height="@dimen/margin_large"
+                android:layout_width="@dimen/margin_medium_3"
+                android:layout_height="@dimen/margin_medium_3"
                 android:layout_marginEnd="@dimen/margin_medium_2"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"

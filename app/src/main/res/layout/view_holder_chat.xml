@@ -83,8 +83,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:text="5 min"
-                android:textColor="@color/colorAccent"
-                android:textSize="@dimen/text_regular_2x" />
+                android:textSize="@dimen/text_regular" />
 
         </RelativeLayout>
 

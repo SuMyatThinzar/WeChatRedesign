@@ -4,8 +4,11 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
@@ -17,6 +20,8 @@ import com.padcmyanmar.smtz.wechatredesign.mvp.presenters.activityPresenters.New
 import com.padcmyanmar.smtz.wechatredesign.mvp.presenters.activityPresenters.NewGroupPresenterImpl
 import com.padcmyanmar.smtz.wechatredesign.mvp.views.NewGroupView
 import kotlinx.android.synthetic.main.activity_new_group.*
+import kotlinx.android.synthetic.main.activity_sign_up_profile.btnSignUpFinish
+import kotlinx.android.synthetic.main.activity_sign_up_profile.etPasswordSignUp
 
 class NewGroupActivity : AppCompatActivity(), NewGroupView {
 
@@ -61,6 +66,24 @@ class NewGroupActivity : AppCompatActivity(), NewGroupView {
 
     private fun setUpListeners(){
 
+        btnClose.setOnClickListener {
+            finish()
+        }
+
+        etGroupName.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if (s?.isNotEmpty() == true) {
+                    checkValidity()
+                } else {
+                    makeButtonInactive()
+                }
+            }
+
+            override fun afterTextChanged(s: Editable?) {}
+        })
+
         btnCreate.setOnClickListener {
             val membersUids: MutableList<String> = mutableListOf()
             members.add(mUser)
@@ -68,11 +91,11 @@ class NewGroupActivity : AppCompatActivity(), NewGroupView {
                 membersUids.add(it.userUID!!)
             }
 
-            if (etGroupName.text?.trim().toString() != "" && members.size >= 3) {
+            if (members.size >= 3) {
                 mPresenter.onTapCreate(etGroupName.text?.trim().toString(), membersUids)
+                Toast.makeText(applicationContext, "Group Created Successfully", Toast.LENGTH_SHORT).show()
+                finish()
             }
-            onBackPressed()
-            Toast.makeText(this, "Group Created Successfully", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -83,8 +106,23 @@ class NewGroupActivity : AppCompatActivity(), NewGroupView {
         rvSelectedContactsNewGroup.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
         mCheckContactAdapter = CheckContactsAdapter(mPresenter)
-        rvCheckContactsNewGroup.adapter = mCheckContactAdapter
-        rvCheckContactsNewGroup.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        rvContactList.adapter = mCheckContactAdapter
+        rvContactList.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+    }
+
+    private fun checkValidity() {
+        if (members.count() > 1 && etGroupName.text?.trim().toString() != "")  makeButtonActive()
+        else makeButtonInactive()
+    }
+
+    private fun makeButtonInactive() {
+        btnCreate.background = ContextCompat.getDrawable(applicationContext, R.drawable.background_button_inactive)
+        btnCreate.isEnabled = false
+    }
+
+    private fun makeButtonActive() {
+        btnCreate.background = ContextCompat.getDrawable(applicationContext, R.drawable.background_button_accent)
+        btnCreate.isEnabled = true
     }
 
     override fun showContactList(contacts: List<UserVO>) {
@@ -105,6 +143,8 @@ class NewGroupActivity : AppCompatActivity(), NewGroupView {
     override fun setSelectedContacts(contact: UserVO) {
         if (members.isNotEmpty()) {
             var temp = true
+
+            // to check if the selected is already in a list or not
             run loop@{
                 members.forEach{
                     if (it == contact) {
@@ -116,7 +156,7 @@ class NewGroupActivity : AppCompatActivity(), NewGroupView {
 
             when (temp) {
                 true -> members.add(contact)
-                false -> members.remove(contact)
+                false -> members.remove(contact)  // selected contact is already chosen, so make it unselected again
             }
 
         } else  members.add(contact)
@@ -131,6 +171,14 @@ class NewGroupActivity : AppCompatActivity(), NewGroupView {
                 }
             }
         }
+
+        // to check the validity to create group
+        if (members.count() > 1) {
+            checkValidity()
+        } else {
+            makeButtonInactive()
+        }
+
         mCheckContactAdapter.setNewData(mContacts)
     }
 

@@ -40,13 +40,14 @@
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:layout_marginEnd="@dimen/margin_medium_2"
-            android:background="@drawable/background_button_accent"
+            android:background="@drawable/background_button_inactive"
             android:elevation="2dp"
             android:fontFamily="serif"
             android:text="@string/lbl_create"
             android:textAllCaps="false"
             android:textColor="@color/white"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:enabled="false"/>
 
     </RelativeLayout>
 
@@ -77,6 +78,7 @@
             android:fontFamily="serif"
             android:singleLine="true"
             android:textSize="@dimen/text_regular_2x" />
+
     </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.cardview.widget.CardView
@@ -109,8 +111,8 @@
                 android:layout_gravity="center"
                 android:layout_toEndOf="@id/btnSearchContact"
                 android:layout_toStartOf="@id/ivClear"
-                android:text="@string/lbl_search"
-                android:textColor="@color/colorSecondaryText"
+                android:hint="@string/lbl_search"
+                android:textColorHint="@color/colorSecondaryText"
                 android:textSize="@dimen/text_regular_2x" />
 
             <ImageView
@@ -132,16 +134,16 @@
         android:id="@+id/rvSelectedContactsNewGroup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingStart="@dimen/margin_medium"
+        android:paddingStart="@dimen/margin_card_medium"
         android:paddingBottom="@dimen/margin_medium_2"
-        android:layout_marginTop="@dimen/margin_medium_2"/>
+        android:layout_marginTop="@dimen/margin_medium_2"
+        android:clipToPadding="false"/>
 
     <LinearLayout
         android:id="@+id/llContactListView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:visibility="gone">
+        android:orientation="vertical">
 
         <TextView
             android:layout_width="wrap_content"
@@ -154,7 +156,7 @@
             android:textStyle="bold" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvCheckContactsNewGroup"
+            android:id="@+id/rvContactList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_medium_2"

@@ -43,7 +43,7 @@ class LoginActivity : AppCompatActivity(), LoginView {
         }
 
         btnBackLogin.setOnClickListener {
-            super.onBackPressed()
+            finish()
         }
     }
 

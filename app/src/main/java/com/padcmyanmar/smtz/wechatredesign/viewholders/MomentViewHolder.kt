@@ -9,6 +9,8 @@ import com.padcmyanmar.smtz.wechatredesign.adapters.MomentPhotoPortraitAdapter
 import com.padcmyanmar.smtz.wechatredesign.data.vos.MomentVO
 import com.padcmyanmar.smtz.wechatredesign.data.vos.UserVO
 import com.padcmyanmar.smtz.wechatredesign.delegates.MomentActionButtonsDelegate
+import com.padcmyanmar.smtz.wechatredesign.utils.timestampToDateString
+import com.padcmyanmar.smtz.wechatredesign.utils.timestampToTimeString
 import kotlinx.android.synthetic.main.view_holder_moment.view.*
 import java.util.concurrent.TimeUnit
 
@@ -26,9 +28,15 @@ class MomentViewHolder(itemView: View, private val mDelegate: MomentActionButton
     fun bindData(data: MomentVO, momentUser: UserVO) {
         mDataVO = data
 
-        itemView.tvContent.text = data.content
         itemView.tvLikeCount.text = data.likeCount
         itemView.tvUserNameMoments.text = momentUser.name
+
+        if (data.content?.isNotEmpty() == true) {
+            itemView.tvContent.visibility = View.VISIBLE
+            itemView.tvContent.text = data.content
+        } else {
+            itemView.tvContent.visibility = View.GONE
+        }
 
         if (momentUser.profile != "") {
             Glide.with(itemView.context)
@@ -46,16 +54,26 @@ class MomentViewHolder(itemView: View, private val mDelegate: MomentActionButton
         var textToShow = ""
 
         when {
-            differentMin < 1          -> textToShow = "just now"
-            differentMin < 60              -> textToShow = "$differentMin minute ago"
-            differentHour in 1..24   -> textToShow = "$differentHour hour ago"
-            differentDay in 1..30    -> textToShow = "$differentDay day ago"
-            differentMonth in 1..12  -> textToShow = "$differentMonth month ago"
-            differentYear > 0              -> textToShow = "$differentYear year ago"
+            differentMin < 1             -> textToShow = "just now"
+            differentMin < 60            -> textToShow = "$differentMin minute ago"
+            differentHour in 1..24  -> textToShow = "$differentHour hour ago"
+            differenceMillis > 86400000L  -> textToShow =
+              "${timestampToDateString(data.millis ?: 0)} - ${timestampToTimeString(data.millis ?: 0)}"  // if more than 24 hours/a day
         }
+
+        // condition check with minute,hour,day,month,year
+//        when {
+//            differentMin < 1         -> textToShow = "just now"
+//            differentMin < 60        -> textToShow = "$differentMin minute ago"
+//            differentHour in 1..24   -> textToShow = "$differentHour hour ago"
+//            differentDay in 1..30    -> textToShow = "$differentDay day ago"
+//            differentMonth in 1..11  -> textToShow = "$differentMonth month ago"
+//            differentYear > 0        -> textToShow = "$differentYear year ago"
+//        }
 
         itemView.tvPostedTimeMoments.text = textToShow
 
+        // condition check with Millis
 //        when {
 //            differentMin < 1 -> {
 //                itemView.tvPostedTimeMoments.text = "just now"
@@ -75,8 +93,10 @@ class MomentViewHolder(itemView: View, private val mDelegate: MomentActionButton
 //        }
 
         // bind child photo list
-        data.photoList?.let {
-            mMomentPhotoPortraitAdapter.setNewData(it)
+        if (data.photoList?.isNotEmpty() == true) {
+            mMomentPhotoPortraitAdapter.setNewData(data.photoList!!)
+        } else {
+            itemView.rvMomentPhotos.visibility = View.GONE
         }
 
         // listeners
@@ -97,12 +117,11 @@ class MomentViewHolder(itemView: View, private val mDelegate: MomentActionButton
             }
             data.isLikedByUser?.let { setLikeButton(it) }
         }
-
     }
 
     private fun setLikeButton(temp: Boolean) {
 
-        if (temp == true) {
+        if (temp) {
             itemView.btnLike.setImageResource(R.drawable.ic_heart_red)
         } else {
             itemView.btnLike.setImageResource(R.drawable.ic_heart)

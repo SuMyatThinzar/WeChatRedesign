@@ -12,9 +12,15 @@ class NewGroupPresenterImpl : NewGroupPresenter, AbstractBasePresenter<NewGroupV
 
     override fun onUiReady(owner: LifecycleOwner, currentUser: String) {
         mUserModel.getContacts(currentUser, onSuccess = { contactList->
-            mView.showContactList(contactList)
+            if (contactList.isNotEmpty()) {
+                mView.showContactList(contactList)
+                mView.hideEmptyView()
+            } else {
+                mView.showEmptyView()
+            }
         }, onFailure = {
             mView.showError(it)
+            mView.showEmptyView()
         })
     }
 

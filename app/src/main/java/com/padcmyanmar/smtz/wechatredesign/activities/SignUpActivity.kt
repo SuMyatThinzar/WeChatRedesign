@@ -44,7 +44,7 @@ class SignUpActivity : AppCompatActivity(), SignUpView {
 
     private fun setUpListeners() {
         btnBackSignUp.setOnClickListener {
-            super.onBackPressed()
+            finish()
         }
         btnVerify.setOnClickListener {
             phoneNumber = etPhoneNumberSignUp.text?.trim().toString()

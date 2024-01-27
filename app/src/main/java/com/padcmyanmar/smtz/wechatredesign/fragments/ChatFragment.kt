@@ -16,6 +16,7 @@ import com.padcmyanmar.smtz.wechatredesign.adapters.ActivePeopleAdapter
 import com.padcmyanmar.smtz.wechatredesign.adapters.ChatLastMessageAdapter
 import com.padcmyanmar.smtz.wechatredesign.adapters.GroupLastMessageAdapter
 import com.padcmyanmar.smtz.wechatredesign.data.vos.GroupVO
+import com.padcmyanmar.smtz.wechatredesign.data.vos.MessageVO
 import com.padcmyanmar.smtz.wechatredesign.data.vos.UserVO
 import com.padcmyanmar.smtz.wechatredesign.mvp.presenters.fragmentPresenters.ChatPresenter
 import com.padcmyanmar.smtz.wechatredesign.mvp.presenters.fragmentPresenters.ChatPresenterImpl
@@ -30,6 +31,9 @@ class ChatFragment(private var user: UserVO) : Fragment(), ChatView {
     private lateinit var mActivePeopleAdapter: ActivePeopleAdapter
     private lateinit var mChatLastMessageAdapter: ChatLastMessageAdapter
     private lateinit var mGroupLastMessageAdapter: GroupLastMessageAdapter
+
+    private var contactList = listOf<UserVO>()
+    private var messageList = listOf<String>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -64,7 +68,7 @@ class ChatFragment(private var user: UserVO) : Fragment(), ChatView {
     }
 
     private fun setUpAdapters() {
-        mActivePeopleAdapter = ActivePeopleAdapter()
+        mActivePeopleAdapter = ActivePeopleAdapter(mPresenter, user.userUID!!)
         rvActivePeople.adapter = mActivePeopleAdapter
         rvActivePeople.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
 
@@ -78,14 +82,29 @@ class ChatFragment(private var user: UserVO) : Fragment(), ChatView {
     }
 
     override fun showContactsData(contacts: List<UserVO>) {
-        mActivePeopleAdapter.setNewData(contacts)
+        contactList = contacts
+
+        if (contacts.isNotEmpty()) {
+            emptyViewChat.visibility = View.GONE
+            mActivePeopleAdapter.setNewData(contacts)
+        } else {
+            emptyViewChat.visibility = View.VISIBLE
+        }
     }
     override fun setUpMessages(messagedContacts: List<String>) {
+        messageList = messagedContacts
         mChatLastMessageAdapter.setNewData(messagedContacts)
     }
 
     override fun showGroupListUserJoined(groupsUserJoined: MutableSet<String>) {
-        mGroupLastMessageAdapter.setNewData(groupsUserJoined)
+        if (groupsUserJoined.isNotEmpty()) {
+            tvGroupsTitle.visibility = View.VISIBLE
+            rvGroupChat.visibility = View.VISIBLE
+            mGroupLastMessageAdapter.setNewData(groupsUserJoined)
+        } else {
+            tvGroupsTitle.visibility = View.GONE
+            rvGroupChat.visibility = View.GONE
+        }
     }
 
     override fun navigateToChatThread(loggedInUserUID: String, contactUID: String) {

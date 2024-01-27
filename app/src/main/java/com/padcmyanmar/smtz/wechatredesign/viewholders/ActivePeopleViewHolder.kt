@@ -4,27 +4,28 @@ import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.padcmyanmar.smtz.wechatredesign.data.vos.UserVO
+import com.padcmyanmar.smtz.wechatredesign.delegates.ChatThreadDelegate
 import kotlinx.android.synthetic.main.view_holder_active_people.view.*
 
-class ActivePeopleViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+class ActivePeopleViewHolder(itemView: View, private val mDelegate: ChatThreadDelegate, private var currentUser: String) : RecyclerView.ViewHolder(itemView) {
 
-//    private var mDataVO :  ? = null
+    private var friendVO : UserVO ? = null
 
-    //    init {
-//        itemView.setOnClickListener {
-//            mDataVO?.let {
-//
-//            }
-//        }
-//    }
-//
-    fun bindData(data: UserVO) {
-//        mDataVO = data
+    init {
+        itemView.setOnClickListener {
+            friendVO?.let {
+                mDelegate.onTapChat(currentUser, it.userUID!!)
+            }
+        }
+    }
+
+    fun bindData(friend: UserVO) {
+        friendVO = friend
 
         Glide.with(itemView.context)
-            .load(data.profile)
+            .load(friend.profile)
             .into(itemView.ivActivePersonProfileChat)
 
-        itemView.tvActivePersonNameChat.text = data.name
+        itemView.tvActivePersonNameChat.text = friend.name
     }
 }
