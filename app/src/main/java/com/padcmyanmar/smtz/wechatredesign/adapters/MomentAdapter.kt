@@ -13,6 +13,7 @@ class MomentAdapter(private val mDelegate: MomentActionButtonsDelegate, val user
 
     private var mData: List<MomentVO> = listOf()
     private var mUserList: List<UserVO> = listOf()
+    private var mType: String = ""
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MomentViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.view_holder_moment,parent,false)
@@ -32,7 +33,7 @@ class MomentAdapter(private val mDelegate: MomentActionButtonsDelegate, val user
                 }
             }
 
-            holder.bindData(mData[position], eachUserProfile)
+            holder.bindData(mData[position], eachUserProfile, mType)
         }
     }
 
@@ -40,9 +41,20 @@ class MomentAdapter(private val mDelegate: MomentActionButtonsDelegate, val user
         return mData.count()
     }
 
-    fun setNewData(data: List<MomentVO>, userList: List<UserVO>){
+    // to prevent triggering wrong image with glide can be fixed using itemView.ivProfileMoments.setImageDrawable(null) but loading very long
+    override fun getItemId(position: Int): Long {
+        return position.toLong()
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return position
+    }
+
+    fun setNewData(data: List<MomentVO>, userList: List<UserVO>, type: String){
         mUserList = userList
-        mData = data.reversed()
+        mData = data
+        mType = type
         notifyDataSetChanged()
     }
+
 }

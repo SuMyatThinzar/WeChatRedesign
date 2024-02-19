@@ -4,6 +4,6 @@ import com.padcmyanmar.smtz.wechatredesign.data.vos.UserVO
 
 interface MyView : BaseView {
     fun showDialog(user: UserVO)
-    fun navigateToLoginView()
+//    fun navigateToLoginView()
 //    fun setUpUserVO(user: UserVO)
 }

@@ -1,20 +1,18 @@
 package com.padcmyanmar.smtz.wechatredesign.mvp.presenters.fragmentPresenters
 
 import androidx.lifecycle.LifecycleOwner
-import com.padcmyanmar.smtz.wechatredesign.data.models.UserModel
-import com.padcmyanmar.smtz.wechatredesign.data.models.UserModelImpl
 import com.padcmyanmar.smtz.wechatredesign.data.vos.MomentVO
 import com.padcmyanmar.smtz.wechatredesign.data.vos.UserVO
-import com.padcmyanmar.smtz.wechatredesign.mvp.presenters.activityPresenters.AbstractBasePresenter
+import com.padcmyanmar.smtz.wechatredesign.mvp.presenters.AbstractBasePresenter
 import com.padcmyanmar.smtz.wechatredesign.mvp.views.MomentsView
 
 class MomentsPresenterImpl : MomentsPresenter, AbstractBasePresenter<MomentsView>() {
 
-    private var mUserModel: UserModel = UserModelImpl
-    private var mMomentList: List<MomentVO> = listOf()
-    private var mUserList: ArrayList<UserVO> = arrayListOf()
 
     override fun onUiReady(owner: LifecycleOwner, currentUser: UserVO) {
+
+        // For updated user profiles
+        val mUserList: ArrayList<UserVO> = arrayListOf()
 
         mUserModel.getAllUsers(onSuccess = { userList ->
             userList.forEach { user ->
@@ -25,20 +23,19 @@ class MomentsPresenterImpl : MomentsPresenter, AbstractBasePresenter<MomentsView
 
 
         mUserModel.getMoments(onSuccess = { momentList ->
-            momentList.forEach { moment ->
 
-                mUserModel.getMomentsLikedByUser(moment.millis!!, onSuccess = { likedUsers ->
-                    likedUsers.forEach{ likedUser ->
-                        if(likedUser.userUID == currentUser.userUID){
+            // သက်သက် collection ထဲကမယူတော့ဘူး MomentVO ထဲမှာပဲသိမ်းထားတဲ့ likeduserlist နဲ့ပဲတိုက်စစ်တော့မလိုတော့ဘူး
 
-                            moment.isLikedByUser = true
-                        }
-                        else
-                            moment.isLikedByUser = false
-                    }
-                }, onFailure = { mView.showError(it) })
-            }
-            mView.showMomentsData(momentList)
+//            momentList.forEach { moment ->
+//                mUserModel.getMomentsLikedByUser(moment.millis!!, onSuccess = { likedUsers ->
+//                    likedUsers.forEach { likedUser ->
+//                        // if this user is liked the moment assign true / false
+//                        moment.isLikedByUser = likedUser.userUID == currentUser.userUID
+//                    }
+//                }, onFailure = { mView.showError(it) })
+//            }
+
+            mView.showMomentsData(momentList.reversed())
         }, onFailure = {
             mView.showError(it)
         })
@@ -46,28 +43,37 @@ class MomentsPresenterImpl : MomentsPresenter, AbstractBasePresenter<MomentsView
 
     override fun onTapLike(moment: MomentVO, currentUser: String): Boolean {
 
-        val millis = System.currentTimeMillis()
-        var temp = true
+        //update api if currentUser is already  liked->remove, else->add
+        // this can check whether emptyList or not
+        val isAlreadyLiked = moment.likedUsers?.any { it == currentUser } == true  //== true for null safety
 
-        //update api if currentUser is already liked->remove,else->add
-        if (moment.likedUsers?.isNotEmpty() == true) {
-
-            moment.likedUsers?.forEach{ likedUser ->
-
-                if (likedUser == currentUser) temp = false
-                else temp = true
-            }
-
-            if (!temp) mUserModel.deleteLikedUserVO(currentUser, moment)
-            else mUserModel.addLikedUserVO(millis, moment, currentUser)
-
-            return temp
-        } else {
-            mUserModel.addLikedUserVO(millis, moment, currentUser)
-            temp = true
-            return temp
+        if (isAlreadyLiked) {
+            moment.likedUsers?.remove(currentUser)
+            moment.likeCount = moment.likeCount?.toInt()?.minus(1).toString()
         }
+        else {
+            moment.likeCount = moment.likeCount?.toInt()?.plus(1).toString()
+            moment.likedUsers?.add(currentUser)
+        }
+
+        mUserModel.updateLikedUser(moment, currentUser)
+        return isAlreadyLiked
     }
+    override fun onTapBookmark(moment: MomentVO, currentUser: String): Boolean {
+
+        val isAlreadyBookmarked = moment.bookmarkedUsers?.contains(currentUser) == true
+
+        if (isAlreadyBookmarked) {
+            moment.bookmarkedUsers?.remove(currentUser)
+        } else {
+            moment.bookmarkedUsers?.add(currentUser)
+        }
+
+        mUserModel.updateBookmarkedUser(moment)
+        return isAlreadyBookmarked
+    }
+
+    override fun onTapDelete(momentId: Long) {}
 
     override fun onUiReady(owner: LifecycleOwner) {}
 

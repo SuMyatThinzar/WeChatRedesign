@@ -40,13 +40,30 @@ object UserModelImpl : UserModel {
         mFirestoreApi.uploadPhotoToFirestoreAndReturnString(imageBitmap, onSuccess)
     }
 
-
-    override fun addMoment(millis: Long, likeCount: String, content: String, user: String, userName: String, userProfile: String, photoListString: ArrayList<String>) {
-        mFirestoreApi.addMoment(millis, likeCount, content, user, userName, userProfile, photoListString, arrayListOf())
+    override fun addMoment(
+        millis: Long,
+        likeCount: String,
+        content: String,
+        user: String,
+        photoListString: ArrayList<String>,
+        onCompletionListener: (isSuccess: Boolean, message: String) -> Unit
+    ) {
+        mFirestoreApi.addMoment(millis, likeCount, content, user, photoListString, likedUsers = arrayListOf(), bookmarkedUsers = arrayListOf(), onCompletionListener)
     }
 
-    override fun addLikedUserVO(millis: Long, moment: MomentVO, likedUser: String) {
-        mFirestoreApi.addLikedUserVO(millis, moment, likedUser)
+    override fun deleteMoment(
+        momentId: Long,
+        onCompletionListener: (isSuccess: Boolean, message: String) -> Unit
+    ) {
+        mFirestoreApi.deleteMoment(momentId, onCompletionListener)
+    }
+
+    override fun updateLikedUser(moment: MomentVO, likedUser: String) {
+        mFirestoreApi.updateLikedUser(moment, likedUser)
+    }
+
+    override fun updateBookmarkedUser(moment: MomentVO) {
+        mFirestoreApi.updateBookmarkedUser(moment)
     }
 
     override fun getMoments(onSuccess: (List<MomentVO>) -> Unit, onFailure: (String) -> Unit) {
@@ -57,9 +74,6 @@ object UserModelImpl : UserModel {
         mFirestoreApi.getMomentsLikedByUser(momentLikedByLoggedInUser, onSuccess, onFailure)
     }
 
-    override fun deleteLikedUserVO(likedUser: String, moment: MomentVO) {
-        mFirestoreApi.deleteLikedUserVO(likedUser, moment)
-    }
 
     override fun addContactsEachOther(loggedInUser: UserVO, contact: UserVO) {
         mFirestoreApi.addContactsEachOther(loggedInUser, contact)

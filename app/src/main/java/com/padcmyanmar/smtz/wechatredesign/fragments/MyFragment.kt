@@ -19,14 +19,11 @@ import com.bumptech.glide.Glide
 import com.google.zxing.BarcodeFormat
 import com.journeyapps.barcodescanner.BarcodeEncoder
 import com.padcmyanmar.smtz.wechatredesign.R
-import com.padcmyanmar.smtz.wechatredesign.activities.LoginActivity
-import com.padcmyanmar.smtz.wechatredesign.activities.MainScreenActivity
+import com.padcmyanmar.smtz.wechatredesign.activities.MyMomentsBookmarksActivity
 import com.padcmyanmar.smtz.wechatredesign.data.vos.UserVO
 import com.padcmyanmar.smtz.wechatredesign.mvp.presenters.fragmentPresenters.MyPresenter
 import com.padcmyanmar.smtz.wechatredesign.mvp.presenters.fragmentPresenters.MyPresenterImpl
 import com.padcmyanmar.smtz.wechatredesign.mvp.views.MyView
-import com.padcmyanmar.smtz.wechatredesign.utils.customPrefs
-import com.padcmyanmar.smtz.wechatredesign.utils.set
 import com.padcmyanmar.smtz.wechatredesign.dialogs.QRCodeDialogFragment
 import com.padcmyanmar.smtz.wechatredesign.dialogs.UserProfileDialogFragment
 import com.padcmyanmar.smtz.wechatredesign.dialogs.UserProfileDialogFragment.Companion.BUNDLE_DATE_OF_BIRTH
@@ -36,12 +33,14 @@ import com.padcmyanmar.smtz.wechatredesign.dialogs.UserProfileDialogFragment.Com
 import com.padcmyanmar.smtz.wechatredesign.dialogs.UserProfileDialogFragment.Companion.BUNDLE_PHONE_NUMBER
 import com.padcmyanmar.smtz.wechatredesign.dialogs.UserProfileDialogFragment.Companion.BUNDLE_PROFILE
 import com.padcmyanmar.smtz.wechatredesign.dialogs.UserProfileDialogFragment.Companion.BUNDLE_UID
+import com.padcmyanmar.smtz.wechatredesign.utils.USER_BOOKMARKED_MOMENTS
+import com.padcmyanmar.smtz.wechatredesign.utils.USER_MOMENTS
 import kotlinx.android.synthetic.main.fragment_moments.toolBar
 import kotlinx.android.synthetic.main.fragment_my.*
 import java.io.IOException
 
 
-class MyFragment(private val mUser: UserVO) : Fragment(), MyView {
+class MyFragment(private val mUser: UserVO) : AbstractBaseFragment(), MyView {
 
     private lateinit var mPresenter: MyPresenter
 
@@ -72,7 +71,7 @@ class MyFragment(private val mUser: UserVO) : Fragment(), MyView {
         mPresenter.onUiReady(this)
     }
 
-    private fun setUpPresenter() {
+    override fun setUpPresenter() {
         mPresenter = ViewModelProvider(this)[MyPresenterImpl::class.java]
         mPresenter.initPresenter(this)
     }
@@ -82,10 +81,12 @@ class MyFragment(private val mUser: UserVO) : Fragment(), MyView {
             mPresenter.onTapEditProfile(mUser)
         }
 
-        btnLogOut.setOnClickListener {
-            val preference = customPrefs(requireContext(), "user_login")
-            preference.set("uid", "")
-            mPresenter.onTapLogout()
+        btnMyBookmarks.setOnClickListener {
+            startActivity(MyMomentsBookmarksActivity.newIntent(requireContext(), userVO = mUser, type = USER_BOOKMARKED_MOMENTS))
+        }
+
+        btnMyMoments.setOnClickListener {
+            startActivity(MyMomentsBookmarksActivity.newIntent(requireContext(), userVO = mUser, type = USER_MOMENTS))
         }
 
         ivGallery.setOnClickListener {
@@ -157,14 +158,6 @@ class MyFragment(private val mUser: UserVO) : Fragment(), MyView {
         )
     }
 
-    override fun navigateToLoginView() {
-
-        // clear activity history
-        val newIntent = Intent(requireContext(), LoginActivity::class.java)
-        newIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        startActivity(newIntent)
-    }
-
     @RequiresApi(Build.VERSION_CODES.P)
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -203,8 +196,4 @@ class MyFragment(private val mUser: UserVO) : Fragment(), MyView {
 //        bindMyData()
 //        setUpListeners()
 //    }
-
-    override fun showError(message: String) {
-        Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
-    }
 }

@@ -17,9 +17,10 @@ import com.padcmyanmar.smtz.wechatredesign.data.vos.UserVO
 import com.padcmyanmar.smtz.wechatredesign.mvp.presenters.fragmentPresenters.MomentsPresenter
 import com.padcmyanmar.smtz.wechatredesign.mvp.presenters.fragmentPresenters.MomentsPresenterImpl
 import com.padcmyanmar.smtz.wechatredesign.mvp.views.MomentsView
+import com.padcmyanmar.smtz.wechatredesign.utils.ALL_MOMENTS
 import kotlinx.android.synthetic.main.fragment_moments.*
 
-class MomentsFragment(private val user: UserVO) : Fragment(), MomentsView {
+class MomentsFragment(private val user: UserVO) : AbstractBaseFragment(), MomentsView {
 
     private lateinit var mPresenter: MomentsPresenter
 
@@ -43,7 +44,7 @@ class MomentsFragment(private val user: UserVO) : Fragment(), MomentsView {
         mPresenter.onUiReady(this, user)
     }
 
-    private fun setUpPresenter() {
+    override fun setUpPresenter() {
         mPresenter = ViewModelProvider(this)[MomentsPresenterImpl::class.java]
         mPresenter.initPresenter(this)
     }
@@ -71,10 +72,6 @@ class MomentsFragment(private val user: UserVO) : Fragment(), MomentsView {
     }
 
     override fun showMomentsData(moments: List<MomentVO>) {
-        mMomentAdapter.setNewData(moments, mUserList)
-    }
-
-    override fun showError(message: String) {
-        Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
+        mMomentAdapter.setNewData(moments, mUserList, ALL_MOMENTS)
     }
 }

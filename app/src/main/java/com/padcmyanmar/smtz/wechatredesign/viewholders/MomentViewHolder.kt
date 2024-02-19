@@ -1,6 +1,8 @@
 package com.padcmyanmar.smtz.wechatredesign.viewholders
 
+import android.view.MenuItem
 import android.view.View
+import android.widget.PopupMenu
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -9,6 +11,9 @@ import com.padcmyanmar.smtz.wechatredesign.adapters.MomentPhotoPortraitAdapter
 import com.padcmyanmar.smtz.wechatredesign.data.vos.MomentVO
 import com.padcmyanmar.smtz.wechatredesign.data.vos.UserVO
 import com.padcmyanmar.smtz.wechatredesign.delegates.MomentActionButtonsDelegate
+import com.padcmyanmar.smtz.wechatredesign.utils.ALL_MOMENTS
+import com.padcmyanmar.smtz.wechatredesign.utils.USER_BOOKMARKED_MOMENTS
+import com.padcmyanmar.smtz.wechatredesign.utils.USER_MOMENTS
 import com.padcmyanmar.smtz.wechatredesign.utils.timestampToDateString
 import com.padcmyanmar.smtz.wechatredesign.utils.timestampToTimeString
 import kotlinx.android.synthetic.main.view_holder_moment.view.*
@@ -16,21 +21,57 @@ import java.util.concurrent.TimeUnit
 
 class MomentViewHolder(itemView: View, private val mDelegate: MomentActionButtonsDelegate, val userUID: String) : RecyclerView.ViewHolder(itemView) {
 
-    private var mDataVO: MomentVO? = null
+    private var momentVO: MomentVO? = null
 
     private var mMomentPhotoPortraitAdapter = MomentPhotoPortraitAdapter()
 
     init {
         itemView.rvMomentPhotos.adapter = mMomentPhotoPortraitAdapter
         itemView.rvMomentPhotos.layoutManager = LinearLayoutManager(itemView.context, LinearLayoutManager.HORIZONTAL, false)
+
+        // listeners
+        itemView.btnLike.setOnClickListener {
+            momentVO?.let { momentVO ->
+                val isLiked = mDelegate.onTapLike(momentVO, userUID)
+                setLikeButton(isLiked)
+            }
+        }
+
+        itemView.btnBookmark.setOnClickListener {
+            momentVO?.let { momentVO ->
+                val isBookmarked = mDelegate.onTapBookmark(momentVO, userUID)
+                setBookmarkButton(isBookmarked)
+            }
+        }
+
+        itemView.moreSetting.setOnClickListener {
+            momentVO?.let { momentVO ->
+                val popupMenu = PopupMenu(itemView.context, it)
+                popupMenu.inflate(R.menu.option_menu)
+
+                // Set a listener for item clicks
+                popupMenu.setOnMenuItemClickListener { menuItem: MenuItem ->
+                    // Handle menu item click
+                    when (menuItem.itemId) {
+                        R.id.action_delete -> {
+                            mDelegate.onTapDelete(momentVO.millis!!)
+                            true
+                        }
+                        else -> false
+                    }
+                }
+                popupMenu.show()
+            }
+        }
     }
 
-    fun bindData(data: MomentVO, momentUser: UserVO) {
-        mDataVO = data
+    fun bindData(data: MomentVO, momentUser: UserVO, type: String) {
+        momentVO = data
 
         itemView.tvLikeCount.text = data.likeCount
         itemView.tvUserNameMoments.text = momentUser.name
 
+        // Text
         if (data.content?.isNotEmpty() == true) {
             itemView.tvContent.visibility = View.VISIBLE
             itemView.tvContent.text = data.content
@@ -38,6 +79,7 @@ class MomentViewHolder(itemView: View, private val mDelegate: MomentActionButton
             itemView.tvContent.visibility = View.GONE
         }
 
+//        itemView.ivProfileMoments.setImageDrawable(null)
         if (momentUser.profile != "") {
             Glide.with(itemView.context)
                 .load(momentUser.profile)
@@ -47,9 +89,6 @@ class MomentViewHolder(itemView: View, private val mDelegate: MomentActionButton
         val differenceMillis = System.currentTimeMillis() - data.millis!!  // differences between current time and posted time
         val differentMin = TimeUnit.MILLISECONDS.toMinutes(differenceMillis)
         val differentHour = TimeUnit.MILLISECONDS.toHours(differenceMillis)
-        val differentDay = TimeUnit.MILLISECONDS.toDays(differenceMillis)
-        val differentMonth = differentDay / 30  // assuming a 30-day month
-        val differentYear = differentDay / 365  // approximate number of days in a year
 
         var textToShow = ""
 
@@ -61,61 +100,32 @@ class MomentViewHolder(itemView: View, private val mDelegate: MomentActionButton
               "${timestampToDateString(data.millis ?: 0)} - ${timestampToTimeString(data.millis ?: 0)}"  // if more than 24 hours/a day
         }
 
-        // condition check with minute,hour,day,month,year
-//        when {
-//            differentMin < 1         -> textToShow = "just now"
-//            differentMin < 60        -> textToShow = "$differentMin minute ago"
-//            differentHour in 1..24   -> textToShow = "$differentHour hour ago"
-//            differentDay in 1..30    -> textToShow = "$differentDay day ago"
-//            differentMonth in 1..11  -> textToShow = "$differentMonth month ago"
-//            differentYear > 0        -> textToShow = "$differentYear year ago"
-//        }
-
         itemView.tvPostedTimeMoments.text = textToShow
-
-        // condition check with Millis
-//        when {
-//            differentMin < 1 -> {
-//                itemView.tvPostedTimeMoments.text = "just now"
-//            }
-//            differentMin in 1..59 -> {    // less than 1 hour
-//                itemView.tvPostedTimeMoments.text = "$differentMin min ago"
-//            }
-//            differentMin in 60..1439 -> {   // over an hour but less than 24 hour
-//                itemView.tvPostedTimeMoments.text = "${differentMin / 60} hour ago"
-//            }
-//            differentMin in 1440..43199 -> {   // over 1 day (1440 minutes) but less than 30 day
-//                itemView.tvPostedTimeMoments.text = "${differentMin / 1440} day ago"
-//            }
-//            differentMin > 43200 -> {   // over 1 month
-//                itemView.tvPostedTimeMoments.text = "${differentMin / 43200} month ago"
-//            }
-//        }
 
         // bind child photo list
         if (data.photoList?.isNotEmpty() == true) {
             mMomentPhotoPortraitAdapter.setNewData(data.photoList!!)
+            itemView.rvMomentPhotos.visibility = View.VISIBLE
         } else {
             itemView.rvMomentPhotos.visibility = View.GONE
         }
 
-        // listeners
-        itemView.btnLike.setOnClickListener {
-            val temp = mDelegate.onTapLike(data, userUID)
-            setLikeButton(temp)
-        }
+        // current user က like လုပ်ထားမထား
+        data.isLikedByUser = data.likedUsers?.any { it == userUID }  // no need to loop, no need condition check
+        data.isLikedByUser?.let { setLikeButton(it) }
 
-        data.likedUsers?.let { likedUsers->
+        // current user က bookmark လုပ်ထားမထား
+        data.isBookmarkedByUser = data.bookmarkedUsers?.any { it == userUID }
+        data.isBookmarkedByUser?.let { setBookmarkButton(it) }
 
-            for (liker in likedUsers) {
-                if (liker == userUID) {
-                    data.isLikedByUser = true
-                    break
-                } else {
-                    data.isLikedByUser = false
-                }
+
+        // more button visibility
+        itemView.moreSetting.apply {
+            when (type) {
+                ALL_MOMENTS -> visibility = View.GONE
+                USER_MOMENTS -> visibility = View.VISIBLE
+                USER_BOOKMARKED_MOMENTS -> visibility = View.GONE
             }
-            data.isLikedByUser?.let { setLikeButton(it) }
         }
     }
 
@@ -125,6 +135,15 @@ class MomentViewHolder(itemView: View, private val mDelegate: MomentActionButton
             itemView.btnLike.setImageResource(R.drawable.ic_heart_red)
         } else {
             itemView.btnLike.setImageResource(R.drawable.ic_heart)
+        }
+    }
+
+    private fun setBookmarkButton(temp: Boolean) {
+
+        if (temp) {
+            itemView.btnBookmark.setImageResource(R.drawable.ic_bookmark_red)
+        } else {
+            itemView.btnBookmark.setImageResource(R.drawable.ic_bookmark)
         }
     }
 }

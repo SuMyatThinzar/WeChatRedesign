@@ -24,7 +24,7 @@ import com.padcmyanmar.smtz.wechatredesign.mvp.views.ChatView
 import kotlinx.android.synthetic.main.fragment_chat.*
 import kotlinx.android.synthetic.main.fragment_moments.toolBar
 
-class ChatFragment(private var user: UserVO) : Fragment(), ChatView {
+class ChatFragment(private var user: UserVO) : AbstractBaseFragment(), ChatView {
 
     private lateinit var mPresenter: ChatPresenter
 
@@ -52,7 +52,7 @@ class ChatFragment(private var user: UserVO) : Fragment(), ChatView {
         mPresenter.onUiReady(this, user.userUID!!)
     }
 
-    private fun setUpPresenter() {
+    override fun setUpPresenter() {
         mPresenter = ViewModelProvider(this)[ChatPresenterImpl::class.java]
         mPresenter.initPresenter(this)
     }
@@ -113,9 +113,5 @@ class ChatFragment(private var user: UserVO) : Fragment(), ChatView {
 
     override fun navigateToChatThreadFromGroup(loggedInUser: UserVO, group: GroupVO) {
         startActivity(ChatThreadGroupActivity.newIntent(requireContext(), loggedInUser, group))
-    }
-
-    override fun showError(message: String) {
-        Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
     }
 }

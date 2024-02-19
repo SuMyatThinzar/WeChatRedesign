@@ -45,7 +45,8 @@
             android:layout_height="wrap_content"
             android:text="Hello"
             android:textColor="@color/black"
-            android:textSize="@dimen/text_regular_2x" />
+            android:textSize="@dimen/text_regular_2x"
+            android:fontFamily="serif" />
 
         <TextView
             android:id="@+id/tvTimeSent"
@@ -53,7 +54,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_medium"
             android:text="12:30 AM"
-            android:textSize="@dimen/text_smaller" />
+            android:textSize="@dimen/text_smaller"
+            android:fontFamily="serif" />
 
     </LinearLayout>
 

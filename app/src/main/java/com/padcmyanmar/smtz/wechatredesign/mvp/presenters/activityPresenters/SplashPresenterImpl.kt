@@ -1,6 +1,7 @@
 package com.padcmyanmar.smtz.wechatredesign.mvp.presenters.activityPresenters
 
 import androidx.lifecycle.LifecycleOwner
+import com.padcmyanmar.smtz.wechatredesign.mvp.presenters.AbstractBasePresenter
 import com.padcmyanmar.smtz.wechatredesign.mvp.views.SplashScreenView
 
 class SplashPresenterImpl : SplashPresenter, AbstractBasePresenter<SplashScreenView>() {

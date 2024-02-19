@@ -17,7 +17,7 @@ import com.padcmyanmar.smtz.wechatredesign.mvp.views.MainScreenView
 import kotlinx.android.synthetic.main.activity_main_screen.*
 
 
-class MainScreenActivity : AppCompatActivity(), MainScreenView {
+class MainScreenActivity : AbstractBaseActivity(), MainScreenView {
 
     private lateinit var mPresenter: MainScreenPresenter
 
@@ -33,6 +33,7 @@ class MainScreenActivity : AppCompatActivity(), MainScreenView {
         fun newIntent(context: Context, uid: String): Intent {
             val intent = Intent(context, MainScreenActivity::class.java)
             intent.putExtra(EXTRA_USER_UID, uid)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
             return intent
         }
     }
@@ -47,7 +48,7 @@ class MainScreenActivity : AppCompatActivity(), MainScreenView {
         mPresenter.onUiReady(this, uid)
     }
 
-    private fun setUpPresenter() {
+    override fun setUpPresenter() {
         mPresenter = ViewModelProvider(this)[MainScreenPresenterImpl::class.java]
         mPresenter.initPresenter(this)
     }
@@ -55,10 +56,6 @@ class MainScreenActivity : AppCompatActivity(), MainScreenView {
     override fun setUpUserVO(user: UserVO) {
         mUserVO = user
         setUpBottomNavigation(user, previousIndex)
-    }
-
-    override fun showError(message: String) {
-        Snackbar.make(window.decorView, message, Snackbar.LENGTH_LONG).show()
     }
 
     private fun setUpBottomNavigation(user: UserVO, index: Int) {

@@ -5,4 +5,6 @@ import com.padcmyanmar.smtz.wechatredesign.data.vos.MomentVO
 interface MomentActionButtonsDelegate {
     // to bind reaction color of logged in user and change moment's like count
     fun onTapLike(moment: MomentVO, currentUser: String) : Boolean
+    fun onTapBookmark(moment: MomentVO, currentUser: String) : Boolean
+    fun onTapDelete(momentId: Long)
 }

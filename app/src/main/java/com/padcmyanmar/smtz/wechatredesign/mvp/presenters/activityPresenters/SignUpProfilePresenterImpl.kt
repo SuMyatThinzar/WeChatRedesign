@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.lifecycle.LifecycleOwner
 import com.padcmyanmar.smtz.wechatredesign.data.models.AuthenticationModel
 import com.padcmyanmar.smtz.wechatredesign.data.models.AuthenticationModelImpl
+import com.padcmyanmar.smtz.wechatredesign.mvp.presenters.AbstractBasePresenter
 import com.padcmyanmar.smtz.wechatredesign.mvp.views.SignUpProfileView
 import com.padcmyanmar.smtz.wechatredesign.utils.customPrefs
 import com.padcmyanmar.smtz.wechatredesign.utils.set

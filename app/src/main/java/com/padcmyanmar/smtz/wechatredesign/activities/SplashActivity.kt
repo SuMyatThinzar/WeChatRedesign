@@ -17,7 +17,7 @@ import com.padcmyanmar.smtz.wechatredesign.utils.get
 import kotlinx.android.synthetic.main.activity_splash.*
 
 @SuppressLint("CustomSplashScreen")
-class SplashActivity : AppCompatActivity(), SplashScreenView {
+class SplashActivity : AbstractBaseActivity(), SplashScreenView {
 
     private lateinit var mPresenter: SplashPresenter
 
@@ -51,7 +51,7 @@ class SplashActivity : AppCompatActivity(), SplashScreenView {
 
     }
 
-    private fun setUpPresenter() {
+    override fun setUpPresenter() {
         mPresenter = ViewModelProvider(this)[SplashPresenterImpl::class.java]
         mPresenter.initPresenter(this)
     }
@@ -71,9 +71,5 @@ class SplashActivity : AppCompatActivity(), SplashScreenView {
 
     override fun navigateToLoginScreen() {
         startActivity(Intent(this, LoginActivity::class.java))
-    }
-
-    override fun showError(message: String) {
-        Snackbar.make(window.decorView, message, Snackbar.LENGTH_LONG).show()
     }
 }

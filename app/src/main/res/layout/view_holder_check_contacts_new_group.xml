@@ -5,6 +5,7 @@
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/margin_medium"
     android:orientation="horizontal"
+    android:background="@color/colorPrimary"
     app:cardCornerRadius="@dimen/margin_medium">
 
     <LinearLayout
@@ -62,14 +63,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
+                android:letterSpacing="-0.03"
                 android:text="Su Myat"
                 android:textColor="@color/colorAccent"
-                android:textSize="@dimen/text_regular_2x" />
+                android:textSize="@dimen/text_regular_2x"
+                android:fontFamily="serif" />
 
             <ImageView
                 android:id="@+id/ivCheckContact"
-                android:layout_width="@dimen/margin_medium_3"
-                android:layout_height="@dimen/margin_medium_3"
+                android:layout_width="@dimen/margin_card_medium_3"
+                android:layout_height="@dimen/margin_card_medium_3"
                 android:layout_marginEnd="@dimen/margin_medium_2"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"

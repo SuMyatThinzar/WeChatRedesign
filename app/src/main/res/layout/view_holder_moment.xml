@@ -5,6 +5,7 @@
     android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_marginTop="@dimen/margin_card_medium_2"
+    android:background="@color/colorPrimary"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -25,13 +26,13 @@
             android:id="@+id/tvUserNameMoments"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_medium"
+            android:layout_marginStart="@dimen/margin_card_medium_2"
             android:layout_marginTop="@dimen/margin_small"
             android:layout_toEndOf="@id/ivProfileMoments"
             android:text="Michael"
             android:textColor="@color/colorAccent"
             android:textSize="@dimen/text_regular_2x"
-            android:textStyle="bold" />
+            android:textStyle="bold"/>
 
         <TextView
             android:id="@+id/tvPostedTimeMoments"
@@ -40,15 +41,19 @@
             android:layout_below="@id/tvUserNameMoments"
             android:layout_marginTop="@dimen/margin_small"
             android:layout_marginBottom="@dimen/margin_small"
-            android:layout_marginStart="@dimen/margin_medium"
+            android:layout_marginStart="@dimen/margin_card_medium_2"
             android:layout_toEndOf="@id/ivProfileMoments"
-            android:text="15 min ago" />
+            android:text="15 min ago"
+            android:fontFamily="serif" />
 
         <ImageView
-            android:layout_width="@dimen/margin_medium_3"
-            android:layout_height="@dimen/margin_medium_3"
+            android:id="@+id/moreSetting"
+            android:layout_width="@dimen/margin_xlarge"
+            android:layout_height="@dimen/margin_xlarge"
+            android:padding="@dimen/margin_card_medium"
             android:layout_alignParentEnd="true"
-            android:src="@drawable/ic_more" />
+            android:src="@drawable/ic_more"
+            android:visibility="gone"/>
 
     </RelativeLayout>
 
@@ -83,7 +88,8 @@
             android:id="@+id/btnLike"
             android:layout_width="@dimen/margin_large"
             android:layout_height="@dimen/margin_large"
-            android:src="@drawable/ic_heart" />
+            android:src="@drawable/ic_heart"
+            android:background="?attr/selectableItemBackgroundBorderless"/>
 
         <TextView
             android:id="@+id/tvLikeCount"
@@ -100,8 +106,10 @@
             android:id="@+id/btnBookmark"
             android:layout_width="@dimen/margin_large"
             android:layout_height="@dimen/margin_large"
+            android:padding="1dp"
             android:layout_alignParentEnd="true"
-            android:src="@drawable/ic_bookmark" />
+            android:src="@drawable/ic_bookmark"
+            android:background="?attr/selectableItemBackgroundBorderless"/>
         <TextView
             android:id="@+id/tvCommentCount"
             android:layout_width="wrap_content"
@@ -115,9 +123,11 @@
         <ImageView
             android:layout_width="@dimen/margin_large"
             android:layout_height="@dimen/margin_large"
+            android:padding="1dp"
             android:layout_toStartOf="@id/tvCommentCount"
             android:layout_marginEnd="@dimen/margin_small"
-            android:src="@drawable/ic_comment"/>
+            android:src="@drawable/ic_comment"
+            android:background="?attr/selectableItemBackgroundBorderless"/>
 
     </RelativeLayout>
 

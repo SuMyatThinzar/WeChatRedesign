@@ -1,6 +1,7 @@
 package com.padcmyanmar.smtz.wechatredesign.mvp.presenters.activityPresenters
 
 import android.content.Context
+import com.padcmyanmar.smtz.wechatredesign.mvp.presenters.BasePresenter
 import com.padcmyanmar.smtz.wechatredesign.mvp.views.LoginView
 
 interface LoginPresenter : BasePresenter<LoginView> {

@@ -5,10 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginEnd="@dimen/margin_medium_2"
-    android:layout_marginBottom="@dimen/margin_medium"
+    android:layout_marginBottom="@dimen/margin_card_medium_2"
     android:orientation="horizontal"
     android:elevation="5dp"
-    app:cardCornerRadius="@dimen/margin_medium">
+    app:cardCornerRadius="@dimen/margin_medium"
+    android:background="@color/colorPrimary"
+    android:foreground="?attr/selectableItemBackground">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -67,7 +69,8 @@
                 android:layout_height="wrap_content"
                 android:text="Su Myat"
                 android:textColor="@color/colorAccent"
-                android:textSize="@dimen/text_regular_2x" />
+                android:textSize="@dimen/text_regular_2x"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tvLastMessage"
@@ -75,7 +78,9 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tvContactOrGroupName"
                 android:text="What's up"
-                android:textSize="@dimen/text_regular_2x" />
+                android:letterSpacing="-0.03"
+                android:textSize="@dimen/text_regular_2x"
+                android:fontFamily="serif" />
 
             <TextView
                 android:id="@+id/tvLastChattedTime"
@@ -83,7 +88,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:text="5 min"
-                android:textSize="@dimen/text_regular" />
+                android:textSize="@dimen/text_regular"
+                android:fontFamily="serif" />
 
         </RelativeLayout>
 

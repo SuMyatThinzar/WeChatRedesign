@@ -30,7 +30,9 @@
                 android:layout_height="@dimen/margin_large"
                 android:layout_marginStart="@dimen/margin_medium_2"
                 android:layout_marginTop="@dimen/margin_medium_3"
-                android:src="@drawable/ic_baseline_arrow_accent_24dp" />
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_baseline_arrow_accent_24dp"
+                android:background="?attr/selectableItemBackgroundBorderless"/>
 
             <!-- profile -->
             <FrameLayout

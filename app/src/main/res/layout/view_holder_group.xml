@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="110dp"
-    android:layout_height="110dp">
+    android:layout_height="110dp"
+    android:background="@color/colorPrimary">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -10,7 +11,8 @@
         android:layout_marginStart="@dimen/margin_card_medium"
         android:layout_marginEnd="@dimen/margin_card_medium"
         android:layout_marginBottom="@dimen/margin_card_medium"
-        app:cardCornerRadius="@dimen/margin_medium">
+        app:cardCornerRadius="@dimen/margin_medium"
+        android:foreground="?attr/selectableItemBackground">
 
         <com.padcmyanmar.smtz.wechatredesign.components.RoundCornerImageView
             android:id="@+id/ivGroupImage"
@@ -30,7 +32,8 @@
             android:layout_gravity="center_horizontal|bottom"
             android:textColor="@color/black"
             android:textStyle="bold"
-            android:text="Group Name"/>
+            android:text="Group Name"
+            android:fontFamily="serif"/>
 
     </androidx.cardview.widget.CardView>
 

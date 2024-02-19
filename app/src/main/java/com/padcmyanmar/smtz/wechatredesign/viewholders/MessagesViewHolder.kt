@@ -1,6 +1,5 @@
 package com.padcmyanmar.smtz.wechatredesign.viewholders
 
-import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.widget.RelativeLayout
@@ -53,7 +52,7 @@ class MessagesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
                 itemView.llLeft.layoutParams = params
                 itemView.llLeft.gravity = Gravity.END
-                itemView.llLeft.background = ContextCompat.getDrawable(itemView.context, R.drawable.background_button_accent)
+                itemView.llLeft.background = ContextCompat.getDrawable(itemView.context, R.drawable.background_button_active_accent)
 
                 itemView.tvMessageLeft.setTextColor(ContextCompat.getColor(itemView.context, R.color.white))
                 itemView.tvTimeSent.setTextColor(ContextCompat.getColor(itemView.context, R.color.white))

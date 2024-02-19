@@ -9,6 +9,7 @@ import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -27,17 +28,17 @@ import com.padcmyanmar.smtz.wechatredesign.mvp.views.NewMomentView
 import kotlinx.android.synthetic.main.activity_new_moment.*
 import java.io.IOException
 
-class NewMomentActivity : AppCompatActivity(), NewMomentView {
+class NewMomentActivity : AbstractBaseActivity(), NewMomentView {
 
     private lateinit var mPresenter: NewMomentPresenter
 
     private lateinit var mSelectedPhotoAdapter: SelectedPhotoAdapter
-    private var selectedPhotoList: ArrayList<Bitmap> = arrayListOf()
+    private var selectedPhotoBitmapList: ArrayList<Bitmap> = arrayListOf()
     private var photoListString: ArrayList<String> = arrayListOf()
     private var mUser = UserVO()
     private val millis = System.currentTimeMillis()
 
-    private var mUserModel: UserModel = UserModelImpl
+    private var shouldAllowBackPressed: Boolean = true
 
     companion object {
         const val PICK_IMAGE_LIST_REQUEST = 1111
@@ -66,7 +67,7 @@ class NewMomentActivity : AppCompatActivity(), NewMomentView {
         mPresenter.onUiReady(this)
     }
 
-    private fun setUpPresenter() {
+    override fun setUpPresenter() {
         mPresenter = ViewModelProvider(this)[NewMomentPresenterImpl::class.java]
         mPresenter.initPresenter(this)
     }
@@ -94,10 +95,13 @@ class NewMomentActivity : AppCompatActivity(), NewMomentView {
         }
 
         btnCreate.setOnClickListener {
+            // hide keyboard
+            val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(window.decorView.rootView.windowToken, 0)
 
             val content = etCreateMoment.text.toString().trim()
 
-            if(etCreateMoment.text.toString().trim().isNotEmpty() || photoListString.isNotEmpty()) {
+            if(etCreateMoment.text.toString().trim().isNotEmpty() || selectedPhotoBitmapList.isNotEmpty()) {
                 mPresenter.onTapCreate(
                     millis = millis,
                     likeCount = "0",
@@ -105,10 +109,9 @@ class NewMomentActivity : AppCompatActivity(), NewMomentView {
                     user = mUser.userUID!!,
                     userName = mUser.name!!,                // didn't reuse in momentVH as this is static
                     userProfile = mUser.profile ?: "",      // didn't reuse in momentVH as this is static
-                    photoListString = photoListString
+                    photoListBitmap = selectedPhotoBitmapList
                 )
             }
-            finish()
         }
     }
 
@@ -123,18 +126,36 @@ class NewMomentActivity : AppCompatActivity(), NewMomentView {
         toolBar.setTitleTextAppearance(this, R.style.TextAppearanceCreateMoment)
     }
 
+    private fun setUpViewClickable(isClickable: Boolean) {
+        shouldAllowBackPressed = isClickable
+        btnClose.isClickable = isClickable
+        btnCreate.isClickable = isClickable
+        etCreateMoment.isFocusable = isClickable
+        btnSelectPhoto.isClickable = isClickable
+    }
+
+
     override fun setUpImageStringArray(imageString: String) {
         photoListString.add(imageString)
     }
 
     override fun showProgressBar() {
         progressBar.visibility = View.VISIBLE
+        setUpViewClickable(false)
     }
-
     override fun hideProgressBar() {
         progressBar.visibility = View.GONE
+        setUpViewClickable(true)
     }
 
+    override fun finishActivity() {
+        finish()
+    }
+    override fun onBackPressed() {
+        if (shouldAllowBackPressed) {
+            super.onBackPressed()
+        }
+    }
     @RequiresApi(Build.VERSION_CODES.P)
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -150,29 +171,15 @@ class NewMomentActivity : AppCompatActivity(), NewMomentView {
                         val source: ImageDecoder.Source = ImageDecoder.createSource(this.contentResolver, filePath)
                         val bitmap = ImageDecoder.decodeBitmap(source)
 
-                        selectedPhotoList.add(bitmap)
-
-                        mUserModel.uploadPhotoToFirestoreAndReturnString(
-                            bitmap,
-                            onSuccess = {
-                                photoListString.add(it)
-                                mSelectedPhotoAdapter.setNewData(photoListString)
-
-                            })
+                        selectedPhotoBitmapList.add(bitmap)
 
                     } else {
                         val bitmap = MediaStore.Images.Media.getBitmap(
                             this.contentResolver, filePath
                         )
-                        selectedPhotoList.add(bitmap)
-
-                        mUserModel.uploadPhotoToFirestoreAndReturnString(
-                            bitmap,
-                            onSuccess = {
-                                photoListString.add(it)
-                                mSelectedPhotoAdapter.setNewData(photoListString)
-                            })
+                        selectedPhotoBitmapList.add(bitmap)
                     }
+                    mSelectedPhotoAdapter.setNewData(selectedPhotoBitmapList)
                 }
 
             } catch (e: IOException) {
@@ -180,10 +187,4 @@ class NewMomentActivity : AppCompatActivity(), NewMomentView {
             }
         }
     }
-
-    override fun showError(message: String) {
-        Snackbar.make(window.decorView, message, Snackbar.LENGTH_LONG).show()
-    }
-
-
 }

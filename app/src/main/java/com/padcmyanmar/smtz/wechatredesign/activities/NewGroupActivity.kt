@@ -2,7 +2,6 @@ package com.padcmyanmar.smtz.wechatredesign.activities
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -11,7 +10,6 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.snackbar.Snackbar
 import com.padcmyanmar.smtz.wechatredesign.R
 import com.padcmyanmar.smtz.wechatredesign.adapters.CheckContactsAdapter
 import com.padcmyanmar.smtz.wechatredesign.adapters.SelectedContactsAdapter
@@ -20,10 +18,8 @@ import com.padcmyanmar.smtz.wechatredesign.mvp.presenters.activityPresenters.New
 import com.padcmyanmar.smtz.wechatredesign.mvp.presenters.activityPresenters.NewGroupPresenterImpl
 import com.padcmyanmar.smtz.wechatredesign.mvp.views.NewGroupView
 import kotlinx.android.synthetic.main.activity_new_group.*
-import kotlinx.android.synthetic.main.activity_sign_up_profile.btnSignUpFinish
-import kotlinx.android.synthetic.main.activity_sign_up_profile.etPasswordSignUp
 
-class NewGroupActivity : AppCompatActivity(), NewGroupView {
+class NewGroupActivity : AbstractBaseActivity(), NewGroupView {
 
     private lateinit var mPresenter: NewGroupPresenter
 
@@ -59,7 +55,7 @@ class NewGroupActivity : AppCompatActivity(), NewGroupView {
         mPresenter.onUiReady(this, mUser.userUID!!)
     }
 
-    private fun setUpPresenter() {
+    override fun setUpPresenter() {
         mPresenter = ViewModelProvider(this)[NewGroupPresenterImpl::class.java]
         mPresenter.initPresenter(this)
     }
@@ -121,7 +117,7 @@ class NewGroupActivity : AppCompatActivity(), NewGroupView {
     }
 
     private fun makeButtonActive() {
-        btnCreate.background = ContextCompat.getDrawable(applicationContext, R.drawable.background_button_accent)
+        btnCreate.background = ContextCompat.getDrawable(applicationContext, R.drawable.background_button_active_accent)
         btnCreate.isEnabled = true
     }
 
@@ -180,9 +176,5 @@ class NewGroupActivity : AppCompatActivity(), NewGroupView {
         }
 
         mCheckContactAdapter.setNewData(mContacts)
-    }
-
-    override fun showError(message: String) {
-        Snackbar.make(window.decorView, message, Snackbar.LENGTH_LONG).show()
     }
 }

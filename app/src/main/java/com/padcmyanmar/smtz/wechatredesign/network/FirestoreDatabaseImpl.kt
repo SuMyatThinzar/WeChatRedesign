@@ -159,10 +159,10 @@ object FirestoreDatabaseImpl : FirestoreApi {
         likeCount: String,
         content: String,
         user: String,
-        userName: String,
-        userProfile: String,
         photoListString: ArrayList<String>,
-        likedUsers: ArrayList<String>
+        likedUsers: ArrayList<String>,
+        bookmarkedUsers: ArrayList<String>,
+        onCompletionListener: (isSuccess: Boolean, message: String) -> Unit,
     ) {
 
         val momentMap = hashMapOf(
@@ -170,69 +170,87 @@ object FirestoreDatabaseImpl : FirestoreApi {
             "likeCount" to likeCount,
             "content" to content,
             "user" to user,
-            "userName" to userName,
-            "userProfile" to userProfile,
             "photoList" to photoListString,
-            "likedUsers" to likedUsers
+            "likedUsers" to likedUsers,
+            "bookmarkedUsers" to bookmarkedUsers,
         )
 
         db.collection("moments")
             .document(millis.toString())  //key
             .set(momentMap)
-            .addOnSuccessListener { Log.d("Success", "Successfully created a moment") }
-            .addOnFailureListener { Log.d("Failure", "Failed to create a moment") }
+            .addOnSuccessListener { onCompletionListener(true,"Moment Created") }
+            .addOnFailureListener { onCompletionListener( false, it.message.toString()) }
     }
 
-    override fun addLikedUserVO(millis: Long, moment: MomentVO, likedUser: String) {
-
-        moment.likedUsers?.add(likedUser)
-        addMoment(
-            moment.millis!!,
-            (moment.likeCount?.toInt()!! + 1).toString(),
-            moment.content!!,
-            moment.user!!,
-            moment.userName!!,
-            moment.userProfile!!,
-            moment.photoList!!,
-            moment.likedUsers?: arrayListOf()
-        )
-
-        val likeMap = hashMapOf(
-            "millis" to millis,
-            "user" to likedUser,
-        )
+    override fun deleteMoment(
+        momentId: Long,
+        onCompletionListener: (isSuccess: Boolean, message: String) -> Unit
+    ) {
         db.collection("moments")
-            .document("${moment.millis}")
-            .collection("likedUsers")
-            .document(likedUser)  //key
-            .set(likeMap)
-            .addOnSuccessListener { Log.d("Success", "Successfully added like") }
-            .addOnFailureListener { Log.d("Failure", "Failed to add like") }
-    }
-
-    override fun deleteLikedUserVO(likedUser: String, moment: MomentVO) {
-
-        moment.likedUsers?.remove(likedUser)
-
-        if(moment.likeCount?.toInt()!! > 0) {
-            addMoment(
-                moment.millis!!,
-                (moment.likeCount?.toInt()!! - 1).toString(),
-                moment.content!!,
-                moment.user!!,
-                moment.userName!!,
-                moment.userProfile!!,
-                moment.photoList!!,
-                moment.likedUsers?: arrayListOf()
-            )
-        }
-        db.collection("moments")
-            .document("${moment.millis}")
-            .collection("likedUsers")
-            .document(likedUser)  //key
+            .document(momentId.toString())
             .delete()
-            .addOnSuccessListener { Log.d("Success", "Successfully deleted likedUser") }
-            .addOnFailureListener { Log.d("Failure", "Failed to delete likedUser") }
+            .addOnSuccessListener { onCompletionListener(true, "Moment Deleted") }
+            .addOnFailureListener { onCompletionListener(false, it.message.toString()) }
+    }
+
+    override fun updateLikedUser(moment: MomentVO, likedUser: String) {
+
+        addMoment(
+            millis = moment.millis!!,
+            likeCount = moment.likeCount ?: "0",
+            content = moment.content ?: "",
+            user = moment.user!!,
+            photoListString = moment.photoList ?: arrayListOf(),
+            likedUsers = moment.likedUsers ?: arrayListOf(),
+            bookmarkedUsers = moment.bookmarkedUsers ?: arrayListOf()
+        ) {_, _ ->}
+
+        // သက်သက် document မှာ မသိမ်း‌တော့ဘူး
+//        val likeMap = hashMapOf(
+//            "millis" to millis,
+//            "user" to likedUser,
+//        )
+//        db.collection("moments")
+//            .document("${moment.millis}")
+//            .collection("likedUsers")
+//            .document(likedUser)  //key
+//            .set(likeMap)
+//            .addOnSuccessListener { Log.d("Success", "Successfully added like") }
+//            .addOnFailureListener { Log.d("Failure", "Failed to add like") }
+    }
+
+//    override fun deleteLikedUserVO(likedUser: String, moment: MomentVO) {
+//
+//        if(moment.likeCount?.toInt()!! > 0) {
+//            addMoment(
+//                moment.millis!!,
+//                (moment.likeCount?.toInt()!! - 1).toString(),
+//                moment.content!!,
+//                moment.user!!,
+//                moment.photoList!!,
+//                moment.likedUsers ?: arrayListOf()
+//            ) {_, _ ->}
+//        }
+//        db.collection("moments")
+//            .document("${moment.millis}")
+//            .collection("likedUsers")
+//            .document(likedUser)  //key
+//            .delete()
+//            .addOnSuccessListener { Log.d("Success", "Successfully deleted likedUser") }
+//            .addOnFailureListener { Log.d("Failure", "Failed to delete likedUser") }
+//    }
+
+    override fun updateBookmarkedUser(moment: MomentVO) {
+
+        addMoment(
+            millis = moment.millis!!,
+            likeCount = moment.likeCount?:"",
+            content = moment.content?:"",
+            user = moment.user?:"",
+            photoListString = moment.photoList?: arrayListOf(),
+            likedUsers = moment.likedUsers ?: arrayListOf(),
+            bookmarkedUsers = moment.bookmarkedUsers ?: arrayListOf(),
+        ) {_, _ ->}
     }
 
     // to bind like image of moments of logged in user
@@ -282,14 +300,13 @@ object FirestoreDatabaseImpl : FirestoreApi {
                     result.forEach { document ->
                         val data = document.data
                         val moment = MomentVO()
-                        moment.millis = data?.get("millis") as Long
-                        moment.likeCount = data["likeCount"] as String
-                        moment.content = data["content"] as String
-                        moment.user = data["user"] as String
-                        moment.userName = data["userName"] as String
-                        moment.userProfile = data["userProfile"] as String
-                        moment.photoList = data["photoList"] as ArrayList<String>
-                        moment.likedUsers = data["likedUsers"] as ArrayList<String>?
+                        moment.millis = data?.get("millis") as? Long
+                        moment.likeCount = data?.get("likeCount") as? String
+                        moment.content = data?.get("content") as? String
+                        moment.user = data?.get("user") as? String
+                        moment.photoList = data?.get("photoList") as? ArrayList<String>
+                        moment.likedUsers = data?.get("likedUsers") as? ArrayList<String>
+                        moment.bookmarkedUsers = data?.get("bookmarkedUsers") as? ArrayList<String>
                         momentList.add(moment)
                     }
                     onSuccess(momentList)

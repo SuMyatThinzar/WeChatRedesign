@@ -2,6 +2,7 @@ package com.padcmyanmar.smtz.wechatredesign.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.snackbar.Snackbar
 import com.padcmyanmar.smtz.wechatredesign.R
@@ -10,7 +11,7 @@ import com.padcmyanmar.smtz.wechatredesign.mvp.presenters.activityPresenters.Log
 import com.padcmyanmar.smtz.wechatredesign.mvp.views.LoginView
 import kotlinx.android.synthetic.main.activity_login.*
 
-class LoginActivity : AppCompatActivity(), LoginView {
+class LoginActivity : AbstractBaseActivity(), LoginView {
 
     private lateinit var mPresenter: LoginPresenter
 
@@ -24,7 +25,7 @@ class LoginActivity : AppCompatActivity(), LoginView {
         mPresenter.onUiReady(this)
     }
 
-    private fun setUpPresenter() {
+    override fun setUpPresenter() {
         mPresenter = ViewModelProvider(this)[LoginPresenterImpl::class.java]
         mPresenter.initPresenter(this)
     }
@@ -51,7 +52,14 @@ class LoginActivity : AppCompatActivity(), LoginView {
         startActivity(MainScreenActivity.newIntent(this, uid))
     }
 
-    override fun showError(message: String) {
-        Snackbar.make(window.decorView, message, Snackbar.LENGTH_LONG).show()
+    override fun showProgressBar() {
+        btnLogin.visibility = View.GONE
+        progressBar.visibility = View.VISIBLE
     }
+
+    override fun hideProgeessBar() {
+        btnLogin.visibility = View.VISIBLE
+        progressBar.visibility = View.GONE
+    }
+
 }

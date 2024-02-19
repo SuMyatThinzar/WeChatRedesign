@@ -58,13 +58,13 @@ object FirebaseAuthManagerImpl : AuthManager {
     }
 
     override fun verify(phone: String, code: String, onSuccess: () -> Unit, onFailure: (String) -> Unit) {
-        val testCode = "1111"
+//        val testCode = "1111"
 
-        if(code == testCode) {
+//        if(code == testCode) {
             onSuccess()
-        } else {
-            onFailure("Wrong OTP, please try again")
-        }
+//        } else {
+//            onFailure("Wrong OTP, please try again")
+//        }
     }
 
     override fun getUserName(): String {

@@ -8,7 +8,7 @@ import kotlinx.android.synthetic.main.view_holder_selected_photo.view.*
 
 class SelectedPhotoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-    private var mData : String ? = null
+    private var mData : Bitmap ? = null
 
     init {
 //        itemView.setOnClickListener {
@@ -18,13 +18,13 @@ class SelectedPhotoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView
 //        }
     }
 
-    fun bindData(data: String) {
+    fun bindData(data: Bitmap) {
         mData = data
 
-        Glide.with(itemView.context)
-            .load(mData)
-            .into(itemView.ivSelected)
+//        Glide.with(itemView.context)
+//            .load(mData)
+//            .into(itemView.ivSelected)
 
-//        itemView.ivSelected.setImageBitmap(mData)
+        itemView.ivSelected.setImageBitmap(mData)
     }
 }

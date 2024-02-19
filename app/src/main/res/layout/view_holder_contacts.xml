@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="@dimen/margin_medium"
-    android:orientation="horizontal"
-    app:cardCornerRadius="@dimen/margin_medium">
+    android:background="@color/colorPrimary">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_card_medium"
+        android:foreground="?attr/selectableItemBackground"
+        app:cardCornerRadius="@dimen/margin_medium">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -63,12 +68,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
+                android:letterSpacing="-0.05"
                 android:text="Su Myat"
                 android:textColor="@color/colorAccent"
-                android:textSize="@dimen/text_regular_2x" />
+                android:textSize="@dimen/text_regular_2x"
+                android:fontFamily="serif" />
 
         </RelativeLayout>
 
     </LinearLayout>
 
-</androidx.cardview.widget.CardView>
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

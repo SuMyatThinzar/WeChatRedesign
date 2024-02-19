@@ -4,4 +4,5 @@ interface NewMomentView : BaseView {
     fun setUpImageStringArray(imageString: String)
     fun showProgressBar()
     fun hideProgressBar()
+    fun finishActivity()
 }

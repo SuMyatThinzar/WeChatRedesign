@@ -26,7 +26,7 @@ import com.padcmyanmar.smtz.wechatredesign.mvp.views.ContactsView
 import kotlinx.android.synthetic.main.fragment_contacts.*
 import kotlinx.android.synthetic.main.fragment_moments.toolBar
 
-class ContactsFragment : Fragment(), ContactsView {
+class ContactsFragment : AbstractBaseFragment(), ContactsView {
 
     private lateinit var mPresenter: ContactsPresenter
 
@@ -62,7 +62,7 @@ class ContactsFragment : Fragment(), ContactsView {
         mPresenter.onUiReady(this, mUser.userUID!!)
     }
 
-    private fun setUpPresenter() {
+    override fun setUpPresenter() {
         mPresenter = ViewModelProvider(this)[ContactsPresenterImpl::class.java]
         mPresenter.initPresenter(this)
     }
@@ -123,11 +123,11 @@ class ContactsFragment : Fragment(), ContactsView {
     }
 
     override fun hideContactListView() {
-        rvContacts.visibility = View.GONE
+        llContactView.visibility = View.GONE
     }
 
     override fun showContactListView() {
-        rvContacts.visibility = View.VISIBLE
+        llContactView.visibility = View.VISIBLE
     }
 
     override fun navigateToChatThread(loggedInUserUID: String, contactUID: String) {
@@ -140,9 +140,5 @@ class ContactsFragment : Fragment(), ContactsView {
 
     override fun navigateToChatThreadFromGroup(loggedInUser: UserVO, group: GroupVO) {
         startActivity(ChatThreadGroupActivity.newIntent(requireContext(), loggedInUser, group))
-    }
-
-    override fun showError(message: String) {
-        Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
     }
 }

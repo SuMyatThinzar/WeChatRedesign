@@ -26,7 +26,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 import io.reactivex.rxjava3.core.Observable
 import kotlinx.android.synthetic.main.activity_chat_thread.*
 
-class ChatThreadGroupActivity : AppCompatActivity(), ChatThreadGroupView {
+class ChatThreadGroupActivity : AbstractBaseActivity(), ChatThreadGroupView {
 
     private lateinit var mPresenter: ChatThreadGroupPresenter
 
@@ -67,7 +67,7 @@ class ChatThreadGroupActivity : AppCompatActivity(), ChatThreadGroupView {
         mPresenter.onUiReady(this, mGroup)
     }
 
-    private fun setUpPresenter() {
+    override fun setUpPresenter() {
         mPresenter = ViewModelProvider(this)[ChatThreadGroupPresenterImpl::class.java]
         mPresenter.initPresenter(this)
     }
@@ -167,7 +167,4 @@ class ChatThreadGroupActivity : AppCompatActivity(), ChatThreadGroupView {
 //        mMessagesAdapter.setNewData(messages)
 //    }
 
-    override fun showError(message: String) {
-        Snackbar.make(window.decorView, message, Snackbar.LENGTH_LONG).show()
-    }
 }

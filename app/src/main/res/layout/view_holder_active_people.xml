@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="60dp"
+    android:layout_width="80dp"
     android:layout_height="match_parent"
-    android:layout_marginEnd="@dimen/margin_medium_2"
-    android:orientation="vertical">
+    android:background="@color/colorPrimary"
+    android:orientation="vertical"
+    android:padding="@dimen/margin_medium"
+    android:foreground="?attr/selectableItemBackground">
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -52,6 +54,7 @@
         android:gravity="center_horizontal"
         android:text="Su Myat"
         android:textColor="@color/colorAccent"
-        android:textSize="@dimen/text_small" />
+        android:textSize="@dimen/text_small"
+        android:fontFamily="serif" />
 
 </LinearLayout>

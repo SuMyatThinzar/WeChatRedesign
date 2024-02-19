@@ -9,8 +9,6 @@ import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.snackbar.Snackbar
@@ -22,7 +20,7 @@ import com.padcmyanmar.smtz.wechatredesign.utils.dayList
 import com.padcmyanmar.smtz.wechatredesign.utils.yearList
 import kotlinx.android.synthetic.main.activity_sign_up_profile.*
 
-class SignUpProfileActivity : AppCompatActivity(), SignUpProfileView {
+class SignUpProfileActivity : AbstractBaseActivity(), SignUpProfileView {
 
     private lateinit var mPresenter: SignUpProfilePresenter
 
@@ -60,7 +58,7 @@ class SignUpProfileActivity : AppCompatActivity(), SignUpProfileView {
         mPresenter.onUiReady(this)
     }
 
-    private fun setUpPresenter() {
+    override fun setUpPresenter() {
         mPresenter = ViewModelProvider(this)[SignUpProfilePresenterImpl::class.java]
         mPresenter.initPresenter(this)
     }
@@ -132,18 +130,17 @@ class SignUpProfileActivity : AppCompatActivity(), SignUpProfileView {
     }
 
     private fun makeButtonActive() {
-        btnSignUpFinish.background = ContextCompat.getDrawable(this, R.drawable.background_button_accent)
+        btnSignUpFinish.background = ContextCompat.getDrawable(this, R.drawable.background_button_active_accent)
         btnSignUpFinish.isEnabled = true
     }
 
     private fun requestNetworkCall() {
+        progressBar.visibility = View.VISIBLE
         mPresenter.onTapSignUp(phone = phone, name = name, password = password, day = day, month = month, year = year, gender = gender, context = this)
     }
 
     override fun navigateToMomentsScreen(uid: String) {
-        val intent = MainScreenActivity.newIntent(this, uid)
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        startActivity(intent)
+        startActivity(MainScreenActivity.newIntent(this, uid))
     }
 
     private fun setUpRadioButtons() {
@@ -237,6 +234,7 @@ class SignUpProfileActivity : AppCompatActivity(), SignUpProfileView {
     }
 
     override fun showError(message: String) {
+        progressBar.visibility = View.GONE
         Snackbar.make(window.decorView, message, Snackbar.LENGTH_LONG).show()
     }
 }

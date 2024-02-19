@@ -33,22 +33,27 @@ interface UserModel {
         likeCount: String,
         content: String,
         user: String,
-        userName: String,
-        userProfile: String,
-        photoListString: ArrayList<String>
+        photoListString: ArrayList<String>,
+        onCompletionListener: (isSuccess: Boolean, message: String) -> Unit,
     )
 
-    fun addLikedUserVO(
-        millis: Long,
+    fun deleteMoment(
+        momentId: Long,
+        onCompletionListener: (isSuccess: Boolean, message: String) -> Unit,
+    )
+
+    fun updateLikedUser(
         moment: MomentVO,
         likedUser: String,
+    )
+
+    fun updateBookmarkedUser(
+        moment: MomentVO,
     )
 
     fun getMoments(onSuccess: (List<MomentVO>) -> Unit, onFailure: (String) -> Unit)
 
     fun getMomentsLikedByUser(momentLikedByLoggedInUser: Long, onSuccess: (List<LikedUserVO>) -> Unit, onFailure: (String) -> Unit)
-
-    fun deleteLikedUserVO(likedUser: String, moment: MomentVO)
 
     fun addContactsEachOther(loggedInUser: UserVO, contact: UserVO)
 

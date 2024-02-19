@@ -27,7 +27,8 @@
                 android:layout_marginEnd="@dimen/margin_medium_2"
                 android:elevation="2dp"
                 android:src="@drawable/ic_add_moment"
-                app:cornerRadius="@dimen/margin_medium" />
+                app:cornerRadius="@dimen/margin_medium"
+                android:background="?attr/selectableItemBackgroundBorderless"/>
 
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/toolBar"

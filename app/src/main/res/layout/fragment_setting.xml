@@ -25,14 +25,15 @@
                 android:layout_marginEnd="@dimen/margin_medium_2"
                 android:layout_marginBottom="@dimen/margin_small"
                 android:elevation="2dp"
-                android:background="@drawable/background_button_accent">
+                android:background="@drawable/background_button_active_accent">
 
                 <com.padcmyanmar.smtz.wechatredesign.components.RoundCornerImageView
                     android:id="@+id/btnNewMoment"
                     android:layout_width="@dimen/margin_medium_3"
                     android:layout_height="@dimen/margin_medium_3"
                     android:layout_gravity="center"
-                    android:src="@drawable/ic_search" />
+                    android:src="@drawable/ic_search"
+                    android:background="?attr/selectableItemBackgroundBorderless" />
 
             </FrameLayout>
 
@@ -48,5 +49,19 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
+    <Button
+        android:id="@+id/btnLogOut"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="@dimen/margin_medium"
+        android:background="@drawable/background_button_active_accent"
+        android:gravity="center"
+        android:layout_gravity="bottom|center_horizontal"
+        android:text="@string/lbl_logout"
+        android:fontFamily="serif"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_regular_2x"
+        android:textStyle="bold" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

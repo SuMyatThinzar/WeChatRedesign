@@ -3,18 +3,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginStart="@dimen/margin_large"
-    android:layout_marginEnd="@dimen/margin_large"
     android:fitsSystemWindows="true"
+    android:background="@color/colorPrimary"
     tools:context=".activities.SignUpProfileActivity">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/margin_large"
+        android:layout_marginEnd="@dimen/margin_large">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:paddingBottom="@dimen/margin_xxlarge"
             android:orientation="vertical">
 
     <ImageView
@@ -222,15 +224,23 @@
         android:layout_width="150dp"
         android:layout_height="50dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="@dimen/margin_xxlarge"
         android:layout_marginTop="@dimen/margin_medium_3"
         android:background="@drawable/background_button_inactive"
+        android:gravity="center"
         android:text="@string/lbl_sign_up"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="@dimen/text_regular_2x"
         android:textStyle="bold"
         android:enabled="false"/>
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_marginTop="@dimen/margin_medium_2"
+                android:layout_gravity="center_horizontal"/>
 
         </LinearLayout>
 

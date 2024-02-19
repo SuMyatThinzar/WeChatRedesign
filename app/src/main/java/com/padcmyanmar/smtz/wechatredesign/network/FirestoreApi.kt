@@ -4,7 +4,6 @@ import android.graphics.Bitmap
 import com.padcmyanmar.smtz.wechatredesign.data.vos.LikedUserVO
 import com.padcmyanmar.smtz.wechatredesign.data.vos.MomentVO
 import com.padcmyanmar.smtz.wechatredesign.data.vos.UserVO
-import kotlinx.coroutines.flow.Flow
 
 interface FirestoreApi {
     fun addUser(
@@ -31,19 +30,24 @@ interface FirestoreApi {
         likeCount: String,
         content: String,
         user: String,
-        userName: String,
-        userProfile: String,
         photoListString: ArrayList<String>,
-        likedUsers: ArrayList<String>
+        likedUsers: ArrayList<String>,
+        bookmarkedUsers: java.util.ArrayList<String>,
+        onCompletionListener: (isSuccess: Boolean, message: String) -> Unit,
+    )
+
+    fun deleteMoment(
+        momentId: Long,
+        onCompletionListener: (isSuccess: Boolean, message: String) -> Unit,
     )
 
     fun getMoments(onSuccess: (List<MomentVO>) -> Unit, onFailure: (String) -> Unit)
 
     fun getMomentsLikedByUser(momentLikedByLoggedInUser: Long, onSuccess: (List<LikedUserVO>) -> Unit, onFailure: (String) -> Unit)
 
-    fun addLikedUserVO(millis: Long, moment: MomentVO, likedUser: String)
+    fun updateLikedUser(moment: MomentVO, likedUser: String)
 
-    fun deleteLikedUserVO(likedUser: String, moment: MomentVO)
+    fun updateBookmarkedUser(moment: MomentVO)
 
     fun addContactsEachOther(loggedInUser: UserVO, contact: UserVO)
 

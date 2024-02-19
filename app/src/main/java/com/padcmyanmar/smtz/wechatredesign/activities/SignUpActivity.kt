@@ -18,8 +18,7 @@ import com.padcmyanmar.smtz.wechatredesign.mvp.presenters.activityPresenters.Sig
 import com.padcmyanmar.smtz.wechatredesign.mvp.views.SignUpView
 import kotlinx.android.synthetic.main.activity_sign_up.*
 
-
-class SignUpActivity : AppCompatActivity(), SignUpView {
+class SignUpActivity : AbstractBaseActivity(), SignUpView {
 
     private lateinit var mPresenter: SignUpPresenter
 
@@ -36,7 +35,7 @@ class SignUpActivity : AppCompatActivity(), SignUpView {
         mPresenter.onUiReady(this)
     }
 
-    private fun setUpPresenter() {
+    override fun setUpPresenter() {
         mPresenter = ViewModelProvider(this)[SignUpPresenterImpl::class.java]
         mPresenter.initPresenter(this)
     }
@@ -73,10 +72,6 @@ class SignUpActivity : AppCompatActivity(), SignUpView {
 
     override fun navigateToSignUpProfileScreen(phone: String) {
         startActivity(SignUpProfileActivity.newIntent(this, phone))
-    }
-
-    override fun showError(message: String) {
-        Snackbar.make(window.decorView, message, Snackbar.LENGTH_LONG).show()
     }
 
 }

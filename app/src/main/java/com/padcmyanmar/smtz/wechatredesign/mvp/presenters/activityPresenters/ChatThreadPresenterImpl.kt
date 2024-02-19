@@ -4,13 +4,13 @@ import android.graphics.Bitmap
 import androidx.lifecycle.LifecycleOwner
 import com.padcmyanmar.smtz.wechatredesign.data.models.UserModel
 import com.padcmyanmar.smtz.wechatredesign.data.models.UserModelImpl
+import com.padcmyanmar.smtz.wechatredesign.mvp.presenters.AbstractBasePresenter
 import com.padcmyanmar.smtz.wechatredesign.mvp.views.ChatThreadView
 import com.padcmyanmar.smtz.wechatredesign.network.RealtimeApi
 import com.padcmyanmar.smtz.wechatredesign.network.RealtimeDatabaseImpl
 
 class ChatThreadPresenterImpl : ChatThreadPresenter, AbstractBasePresenter<ChatThreadView>() {
 
-    private var mUserModel: UserModel = UserModelImpl
     private var mRealtimeApi: RealtimeApi = RealtimeDatabaseImpl
 
     override fun onUiReady(owner: LifecycleOwner, currentUser: String, contact: String) {
