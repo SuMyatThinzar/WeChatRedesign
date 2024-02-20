@@ -14,4 +14,11 @@
         <item name="android:textStyle">bold</item>
         <item name="fontFamily">serif</item>
     </style>
+    <style name="SearchViewQueryColor">
+        <item name="android:textColorHint">@color/text_color_hint</item>
+        <item name="android:textColor">@color/colorAccent</item>
+    </style>
+    <style name="CustomSearchViewStyle" parent="Widget.AppCompat.SearchView">
+        <item name="android:queryBackground">@android:color/transparent</item>
+    </style>
 </resources>

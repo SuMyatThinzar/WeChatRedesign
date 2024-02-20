@@ -49,9 +49,7 @@ class MomentViewHolder(itemView: View, private val mDelegate: MomentActionButton
                 val popupMenu = PopupMenu(itemView.context, it)
                 popupMenu.inflate(R.menu.option_menu)
 
-                // Set a listener for item clicks
                 popupMenu.setOnMenuItemClickListener { menuItem: MenuItem ->
-                    // Handle menu item click
                     when (menuItem.itemId) {
                         R.id.action_delete -> {
                             mDelegate.onTapDelete(momentVO.millis!!)

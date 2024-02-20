@@ -109,6 +109,10 @@ object UserModelImpl : UserModel {
         mRealtimeApi.addGroup(groupName, members)
     }
 
+    override fun deleteGroup(groupName: String, onCompleteListener: (Boolean, String) -> Unit) {
+        mRealtimeApi.deleteGroup(groupName, onCompleteListener)
+    }
+
     override fun getAllGroups(
         onSuccess: (groups: List<GroupVO>) -> Unit,
         onFailure: (String) -> Unit

@@ -8,6 +8,7 @@
         <item name="android:statusBarColor" >@android:color/transparent</item>
         <!-- Customize your theme here. -->
         <item name="android:windowLightStatusBar">true</item>
+        <item name="searchViewStyle">@style/CustomSearchViewStyle</item>   <!-- For searchbar underline -->
     </style>
 
     <style name="Theme.WeChatRedesign.TransparentStatusBar" parent="Theme.WeChatRedesign">

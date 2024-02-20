@@ -5,11 +5,12 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
+import android.view.View
+import android.widget.PopupMenu
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.snackbar.Snackbar
 import com.padcmyanmar.smtz.wechatredesign.R
 import com.padcmyanmar.smtz.wechatredesign.adapters.MessageAdapter
 import com.padcmyanmar.smtz.wechatredesign.adapters.SelectedMessagePhotoAdapter
@@ -25,6 +26,7 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import io.reactivex.rxjava3.core.Observable
 import kotlinx.android.synthetic.main.activity_chat_thread.*
+import kotlinx.android.synthetic.main.activity_my_moments_bookmarks.loadingView
 
 class ChatThreadGroupActivity : AbstractBaseActivity(), ChatThreadGroupView {
 
@@ -75,6 +77,10 @@ class ChatThreadGroupActivity : AbstractBaseActivity(), ChatThreadGroupView {
     private fun setUpListeners(){
         btnBackChatThread.setOnClickListener { finish() }
 
+        btnSetting.setOnClickListener {
+            showPopUpMenu()
+        }
+
         ivSendPicture.setOnClickListener {
             val intent = Intent()
             intent.type = "image/*"
@@ -117,7 +123,6 @@ class ChatThreadGroupActivity : AbstractBaseActivity(), ChatThreadGroupView {
                     .subscribe{
                         mChosenImagesBitmap.add(it)
 
-//                        rvSelectedPhotosMessage.visibility = View.VISIBLE
                         if(mChosenImagesBitmap.isNotEmpty()) {
                             mSelectedPhotoAdapter.setNewData(mChosenImagesBitmap)
                         }
@@ -142,6 +147,22 @@ class ChatThreadGroupActivity : AbstractBaseActivity(), ChatThreadGroupView {
 
     }
 
+    private fun showPopUpMenu() {
+        val popupMenu = PopupMenu(this, btnSetting)
+        popupMenu.inflate(R.menu.option_menu)
+
+        popupMenu.setOnMenuItemClickListener { menuItem: MenuItem ->
+            when (menuItem.itemId) {
+                R.id.action_delete -> {
+                    mPresenter.onTapDelete(mGroup.groupName)
+                    true
+                }
+                else -> false
+            }
+        }
+        popupMenu.show()
+    }
+
     override fun showGroupMessages(messages: List<MessageVO>) {
         mMessagesAdapter.setNewData(messages)
     }
@@ -153,18 +174,12 @@ class ChatThreadGroupActivity : AbstractBaseActivity(), ChatThreadGroupView {
         tvFriendName.text = mGroup.groupName
     }
 
+    override fun showLoadingView() {
+        loadingView.visibility = View.VISIBLE
+    }
 
-//    override fun setUpCurrentUserVO(currentUserVO: UserVO) {
-//        mCurrentUserVO = currentUserVO
-//    }
-//
-//    override fun setUpContactVO(contactVO: UserVO) {
-//        mContactVO = contactVO
-//        bindData()
-//    }
-//
-//    override fun showMessages(messages: List<MessageVO>) {
-//        mMessagesAdapter.setNewData(messages)
-//    }
-
+    override fun hideLoadingView(isSuccess: Boolean) {
+        loadingView.visibility = View.GONE
+        if (isSuccess) finish()
+    }
 }

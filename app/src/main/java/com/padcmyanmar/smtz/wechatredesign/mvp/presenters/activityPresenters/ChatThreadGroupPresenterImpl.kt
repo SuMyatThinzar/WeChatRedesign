@@ -1,9 +1,8 @@
 package com.padcmyanmar.smtz.wechatredesign.mvp.presenters.activityPresenters
 
 import android.graphics.Bitmap
+import android.util.Log
 import androidx.lifecycle.LifecycleOwner
-import com.padcmyanmar.smtz.wechatredesign.data.models.UserModel
-import com.padcmyanmar.smtz.wechatredesign.data.models.UserModelImpl
 import com.padcmyanmar.smtz.wechatredesign.data.vos.GroupVO
 import com.padcmyanmar.smtz.wechatredesign.mvp.presenters.AbstractBasePresenter
 import com.padcmyanmar.smtz.wechatredesign.mvp.views.ChatThreadGroupView
@@ -40,6 +39,14 @@ class ChatThreadGroupPresenterImpl : ChatThreadGroupPresenter, AbstractBasePrese
             senderProfile = senderProfile,
             file = file
         )
+    }
+
+    override fun onTapDelete(name: String) {
+        mView.showLoadingView()
+        mUserModel.deleteGroup(name) { isSuccess, message ->
+            mView.showError(message)
+            mView.hideLoadingView(isSuccess)
+        }
     }
 
     override fun onUiReady(owner: LifecycleOwner) {}

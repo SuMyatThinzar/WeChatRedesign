@@ -18,6 +18,7 @@ import com.padcmyanmar.smtz.wechatredesign.mvp.presenters.activityPresenters.New
 import com.padcmyanmar.smtz.wechatredesign.mvp.presenters.activityPresenters.NewGroupPresenterImpl
 import com.padcmyanmar.smtz.wechatredesign.mvp.views.NewGroupView
 import kotlinx.android.synthetic.main.activity_new_group.*
+import kotlinx.android.synthetic.main.fragment_contacts.textInputSearch
 
 class NewGroupActivity : AbstractBaseActivity(), NewGroupView {
 
@@ -27,8 +28,9 @@ class NewGroupActivity : AbstractBaseActivity(), NewGroupView {
     private lateinit var mCheckContactAdapter: CheckContactsAdapter
     private lateinit var mSelectedContactsAdapter: SelectedContactsAdapter
 
-    private var members: MutableList<UserVO> = mutableListOf()
+    private var mSelectedMomebers: MutableList<UserVO> = mutableListOf()
     private var mContacts: List<UserVO> = listOf()
+    private var mSelectedContactList: MutableList<UserVO> = mutableListOf()
 
     companion object {
         const val PICK_IMAGE_LIST_REQUEST = 1111
@@ -66,6 +68,20 @@ class NewGroupActivity : AbstractBaseActivity(), NewGroupView {
             finish()
         }
 
+        btnCreate.setOnClickListener {
+            val membersUids: MutableList<String> = mutableListOf()
+            mSelectedMomebers.add(mUser)
+            mSelectedMomebers.reversed().forEach {
+                membersUids.add(it.userUID!!)
+            }
+
+            if (mSelectedMomebers.size >= 3) {
+                mPresenter.onTapCreate(etGroupName.text?.trim().toString(), membersUids)
+                Toast.makeText(applicationContext, "Group Created Successfully", Toast.LENGTH_SHORT).show()
+                finish()
+            }
+        }
+
         etGroupName.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
@@ -80,19 +96,24 @@ class NewGroupActivity : AbstractBaseActivity(), NewGroupView {
             override fun afterTextChanged(s: Editable?) {}
         })
 
-        btnCreate.setOnClickListener {
-            val membersUids: MutableList<String> = mutableListOf()
-            members.add(mUser)
-            members.reversed().forEach {
-                membersUids.add(it.userUID!!)
+        val searchedContacts: MutableList<UserVO> = mutableListOf()
+        textInputSearch.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                searchedContacts.clear()
+                mContacts.forEach {
+                    if (s != null) {
+                        if (it.name?.lowercase()?.contains(s.toString().lowercase()) == true) {
+                            searchedContacts.add(it)
+                        }
+                    }
+                }
+                mCheckContactAdapter.setNewData(searchedContacts)
             }
 
-            if (members.size >= 3) {
-                mPresenter.onTapCreate(etGroupName.text?.trim().toString(), membersUids)
-                Toast.makeText(applicationContext, "Group Created Successfully", Toast.LENGTH_SHORT).show()
-                finish()
-            }
-        }
+            override fun afterTextChanged(s: Editable?) {}
+        })
     }
 
     private fun setUpAdapters() {
@@ -107,7 +128,7 @@ class NewGroupActivity : AbstractBaseActivity(), NewGroupView {
     }
 
     private fun checkValidity() {
-        if (members.count() > 1 && etGroupName.text?.trim().toString() != "")  makeButtonActive()
+        if (mSelectedMomebers.count() > 1 && etGroupName.text?.trim().toString() != "")  makeButtonActive()
         else makeButtonInactive()
     }
 
@@ -126,6 +147,11 @@ class NewGroupActivity : AbstractBaseActivity(), NewGroupView {
         mCheckContactAdapter.setNewData(contacts)
     }
 
+    override fun showSelectedContactList(contacts: List<UserVO>) {
+        mSelectedMomebers = contacts.toMutableList()
+        mSelectedContactsAdapter.setNewData(contacts) // from singleton data setup from impl
+    }
+
     override fun showEmptyView() {
         emptyViewContacts.visibility = View.VISIBLE
         llContactListView.visibility = View.GONE
@@ -134,47 +160,5 @@ class NewGroupActivity : AbstractBaseActivity(), NewGroupView {
     override fun hideEmptyView() {
         emptyViewContacts.visibility = View.GONE
         llContactListView.visibility = View.VISIBLE
-    }
-
-    override fun setSelectedContacts(contact: UserVO) {
-        if (members.isNotEmpty()) {
-            var temp = true
-
-            // to check if the selected is already in a list or not
-            run loop@{
-                members.forEach{
-                    if (it == contact) {
-                        temp = false
-                        return@loop
-                    } else  temp = true
-                }
-            }
-
-            when (temp) {
-                true -> members.add(contact)
-                false -> members.remove(contact)  // selected contact is already chosen, so make it unselected again
-            }
-
-        } else  members.add(contact)
-
-        mSelectedContactsAdapter.setNewData(members)
-
-        //change check button
-        if(mContacts.isNotEmpty()) {
-            mContacts.forEach {
-                if(it == contact) {
-                    it.selected = it.selected == false
-                }
-            }
-        }
-
-        // to check the validity to create group
-        if (members.count() > 1) {
-            checkValidity()
-        } else {
-            makeButtonInactive()
-        }
-
-        mCheckContactAdapter.setNewData(mContacts)
     }
 }

@@ -88,6 +88,11 @@ interface UserModel {
         members: List<String>
     )
 
+    fun deleteGroup(
+        groupName: String,
+        onCompleteListener: (Boolean, String) -> Unit
+    )
+
     fun getAllGroups(
         onSuccess: (groups: List<GroupVO>) -> Unit,
         onFailure: (String) -> Unit

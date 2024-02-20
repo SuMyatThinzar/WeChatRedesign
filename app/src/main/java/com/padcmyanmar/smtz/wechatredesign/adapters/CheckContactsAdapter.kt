@@ -11,7 +11,6 @@ import com.padcmyanmar.smtz.wechatredesign.viewholders.CheckContactsViewHolder
 class CheckContactsAdapter(private val mDelegate: SelectMemberDelegate) : RecyclerView.Adapter<CheckContactsViewHolder>() {
 
     private var mData: List<UserVO> = listOf()
-//    private var mMembers: MutableList<UserVO> = mutableListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CheckContactsViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.view_holder_check_contacts_new_group,parent,false)

@@ -10,5 +10,5 @@ data class UserVO(
     var gender: String? = "",
     var userUID: String? = "",
     var profile: String? = "",
-    var selected: Boolean? = false,
+    var selected: Boolean? = false,  // just for local
 ) : Serializable

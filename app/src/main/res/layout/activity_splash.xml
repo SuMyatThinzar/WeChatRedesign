@@ -9,8 +9,8 @@
     tools:context=".activities.SplashActivity">
 
     <ImageView
-        android:layout_width="160dp"
-        android:layout_height="160dp"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
         android:layout_above="@id/tvLabel"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="150dp"

@@ -17,4 +17,7 @@ interface ChatThreadGroupPresenter : BasePresenter<ChatThreadGroupView> {
         senderProfile: String,
         file: List<Bitmap>
     )
+    fun onTapDelete(
+        name: String,
+    )
 }

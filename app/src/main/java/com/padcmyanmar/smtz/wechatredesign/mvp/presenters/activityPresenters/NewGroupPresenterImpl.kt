@@ -1,13 +1,14 @@
 package com.padcmyanmar.smtz.wechatredesign.mvp.presenters.activityPresenters
 
 import androidx.lifecycle.LifecycleOwner
-import com.padcmyanmar.smtz.wechatredesign.data.models.UserModel
-import com.padcmyanmar.smtz.wechatredesign.data.models.UserModelImpl
+import com.padcmyanmar.smtz.wechatredesign.components.SelectedContactsSingleton
 import com.padcmyanmar.smtz.wechatredesign.data.vos.UserVO
 import com.padcmyanmar.smtz.wechatredesign.mvp.presenters.AbstractBasePresenter
 import com.padcmyanmar.smtz.wechatredesign.mvp.views.NewGroupView
 
 class NewGroupPresenterImpl : NewGroupPresenter, AbstractBasePresenter<NewGroupView>() {
+
+    private var selectedContactList = mutableListOf<UserVO>()
 
     override fun onUiReady(owner: LifecycleOwner, currentUser: String) {
         mUserModel.getContacts(currentUser, onSuccess = { contactList->
@@ -28,7 +29,17 @@ class NewGroupPresenterImpl : NewGroupPresenter, AbstractBasePresenter<NewGroupV
     }
 
     override fun onTapContact(contact: UserVO) {
-        mView.setSelectedContacts(contact)
+
+        val singletonInstance = SelectedContactsSingleton.instance
+        val isSelected = singletonInstance.getAllSelectedContact().any { it.userUID == contact.userUID }
+
+        if (isSelected) {
+            singletonInstance.removeSelectedContact(contact)
+        } else {
+            singletonInstance.addSelectedContact(contact)
+        }
+
+        mView.showSelectedContactList(singletonInstance.getAllSelectedContact())
     }
 
 

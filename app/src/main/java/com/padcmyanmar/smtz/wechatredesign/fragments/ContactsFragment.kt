@@ -1,12 +1,12 @@
 package com.padcmyanmar.smtz.wechatredesign.fragments
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.journeyapps.barcodescanner.ScanContract
@@ -29,6 +29,7 @@ import kotlinx.android.synthetic.main.fragment_moments.toolBar
 class ContactsFragment : AbstractBaseFragment(), ContactsView {
 
     private lateinit var mPresenter: ContactsPresenter
+    private var contactList = listOf<UserVO>()
 
     private lateinit var mUser: UserVO
     private lateinit var mGroupAdapter: GroupAdapter
@@ -86,6 +87,25 @@ class ContactsFragment : AbstractBaseFragment(), ContactsView {
             barcodeLauncher.launch(options)
         }
 
+        val searchedContacts: MutableList<UserVO> = mutableListOf()
+        textInputSearch.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                searchedContacts.clear()
+                contactList.forEach {
+                    if (s != null) {
+                        if (it.name?.lowercase()?.contains(s.toString().lowercase()) == true) {
+                            searchedContacts.add(it)
+                        }
+                    }
+                }
+                mContactAdapter.setNewData(searchedContacts)
+            }
+
+            override fun afterTextChanged(s: Editable?) {}
+        })
+
     }
 
     // Register the launcher and result handler
@@ -119,6 +139,7 @@ class ContactsFragment : AbstractBaseFragment(), ContactsView {
     }
 
     override fun showContactsData(contacts: List<UserVO>) {
+        contactList = contacts
         mContactAdapter.setNewData(contacts)
     }
 

@@ -1,9 +1,11 @@
 package com.padcmyanmar.smtz.wechatredesign.network
 
 import android.graphics.Bitmap
+import android.util.Log
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
@@ -137,6 +139,37 @@ object RealtimeDatabaseImpl : RealtimeApi {
             .child("groups")
             .child(groupName)      // key
             .setValue(GroupVO(groupName = groupName, members = members))
+    }
+
+    override fun deleteGroup(groupName: String, onCompleteListener: (Boolean, String) -> Unit) {
+        database
+            .child("groups")
+            .child(groupName)
+            .removeValue()
+            .addOnSuccessListener {
+                onCompleteListener(true, "Successfully deleted")
+            }
+            .addOnFailureListener { exception ->
+                onCompleteListener(false, exception.message ?: "Failed to delete")
+            }
+
+        // valueEventListener
+//        database
+//            .child("groups")
+//            .child(groupName)
+//            .addListenerForSingleValueEvent(object : ValueEventListener {
+//                override fun onDataChange(dataSnapshot: DataSnapshot) {
+//                    if (dataSnapshot.exists()) {
+//                        Log.d("FirebaseData", "Data exists at $groupName: $dataSnapshot")
+//                    } else {
+//                        Log.d("FirebaseData", "No data exists at $groupName")
+//                    }
+//                }
+//
+//                override fun onCancelled(databaseError: DatabaseError) {
+//                    Log.e("FirebaseData", "Database error: ${databaseError.message}")
+//                }
+//            })
     }
 
     override fun getAllGroups(
