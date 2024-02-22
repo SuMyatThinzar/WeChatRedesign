@@ -1,5 +1,6 @@
 package com.padcmyanmar.smtz.wechatredesign.network
 
+import android.util.Log
 import com.google.firebase.auth.*
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -39,14 +40,16 @@ object FirebaseAuthManagerImpl : AuthManager {
         onFailure: (String) -> Unit
     ) {
         val email = "$phone@gmail.com"
-        val user = Firebase.auth.currentUser
+        val authUser = Firebase.auth.currentUser
 
         mFirebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener {
 
             if (it.isSuccessful && it.isComplete) {
 
                 // create user in cloud firestore
+                val user = it.result?.user
                 val userUID = user?.uid
+
                 mFirestoreApi.addUser(phone, password, userName, dateOfBirth, gender, userUID?:"", "")
                 userUID?.let{ uid ->
                     onSuccess(uid)

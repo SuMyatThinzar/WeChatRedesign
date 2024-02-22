@@ -49,8 +49,10 @@ class SignUpActivity : AbstractBaseActivity(), SignUpView {
             phoneNumber = etPhoneNumberSignUp.text?.trim().toString()
             val code = "${editText1.text}${editText2.text}${editText3.text}${editText4.text}"
 
-            if(phoneNumber.trim() == ""){
+            if (phoneNumber.trim() == ""){
                 Snackbar.make(window.decorView, "Please enter phone number", Snackbar.LENGTH_LONG).show()
+            } else if (phoneNumber.trim().count() < 9) {
+                Snackbar.make(window.decorView, "Invalid phone number", Snackbar.LENGTH_LONG).show()
             } else {
                 mPresenter.onTapVerify(phoneNumber, code)
             }

@@ -27,6 +27,7 @@ object FirestoreDatabaseImpl : FirestoreApi {
         userUID: String,
         profile: String
     ) {
+        Log.d("sdfasfaf", "${userUID}")
         val userMap = hashMapOf(
             "userUID" to userUID,
             "name" to userName,
